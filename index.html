@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trap Runner</title>
+    <!-- Empty icon: without it the browser requests /favicon.ico, gets 404, and the e2e "clean console" check fails. -->
+    <link rel="icon" href="data:," />
+    <style>
+      html, body { margin: 0; background: #111; color: #eee; font: 14px system-ui; }
+      canvas { display: block; margin: 24px auto; width: 960px; height: 720px; image-rendering: pixelated; }
+    </style>
+  </head>
+  <body>
+    <canvas id="game" width="320" height="240"></canvas>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

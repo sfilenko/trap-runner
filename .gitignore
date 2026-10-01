@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env*
+!.env.example
+.claude/settings.local.json
+CLAUDE.local.md
+.playwright-mcp/
