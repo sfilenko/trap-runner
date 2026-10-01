@@ -1,0 +1,19 @@
+schema: spec-driven
+
+# Shown to the agent whenever it creates an artifact (proposal, specs, design, tasks).
+context: |
+  Product: Trap Runner, a small browser platformer (capstone of the fwdays Agentic Engineering course).
+  Stack: TypeScript strict, Vite, Vitest, zod; pnpm only. Node 22.12 or later.
+  The game logic is in src/core. It is pure and deterministic: one call step(world, input) is one tick (1/60 s).
+  src/core must not use window, document, Math.random or Date, and must not import from src/render or src/input.
+  Design and rules: docs/design.md. The implementation plan with the exact code and tests: docs/plan/stage-2-core.md.
+  Physics constants (PHYS in src/core/physics.ts) belong to the human. Do not change them.
+  OpenSpec CLI: only as `pnpm exec openspec` (pinned devDependency), never a bare `openspec`.
+
+rules:
+  specs:
+    - Every scenario names concrete input values and the exact expected output, so a replay test can assert it.
+    - Every scenario has an id (for example MOVE-run-right-01). The replay file tests/replay/<id>.replay.json uses the same id.
+  tasks:
+    - Scenario tests come first. The first task writes the replay files and the stubs, runs pnpm test and quotes the failing lines. Implementation tasks follow.
+    - The last task is "Run pnpm check and quote its summary lines".

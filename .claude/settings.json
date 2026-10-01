@@ -12,6 +12,8 @@
       "Bash(pnpm hooks:selftest)",
       "Bash(pnpm agent:log)",
       "Bash(pnpm agent:log *)",
+      "Bash(pnpm exec openspec *)",
+      "Bash(pnpm spec:check)",
       "Bash(git status *)",
       "Bash(git diff *)",
       "Bash(git log *)"
