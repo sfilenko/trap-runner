@@ -1,0 +1,1 @@
+{"ts":"2026-10-01T22:03:27.753Z","id":"toolu_01DvoeyGwr9c3ArCQN4jJ6ER","session":"b47cca0e","tool":"Write","path":"src/core/spawn.ts","blocked":true,"by":"guard-core","rules":["no-math-random"]}
