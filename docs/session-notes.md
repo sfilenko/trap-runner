@@ -14,10 +14,11 @@
 - 2026-10-02 — Task 2.3 (група 2): `step`, `replay`, `interactions`, заглушка `traps`, 3 тестові файли і 13 `*.replay.json` дослівно з плану; червоний коміт `f4dd72e` — `Tests  17 failed | 15 passed (32)`, без помилок імпорту.
 - 2026-10-02 — Task 2.4 (група 3): `physics.test.ts` червоний `6791fd3` (`8 failed | 1 passed`) → `stepPlayer` зелений `03aba67` (`Tests  5 failed | 36 passed (41)`, червоні лише 5 `TRAP-*`); `PHYS` не змінено. Прогалина плану: 3.1 і 4.1 без зупинки на червоний коміт, а зелений коміт через `-am` не бере новий файл тесту — комітимо червоне окремо і через `git add`.
 - 2026-10-02 — Task 2.5 (група 4): `traps.test.ts` червоний `b95123e` (`5 failed`) → `traps.ts` зелений `cf81fdc` (`Tests  46 passed (46)`). Усі 13 сценаріїв збіглися з поведінкою: коміту `spec: …` (доказ SDD) у зміні A немає — шукати чесний випадок у зміні B або на етапі 3.
+- 2026-10-02 — Зміна A закрита: 4.3 «no spec change», 5.1 `pnpm check` зелений (`72dc0b4`); archive `a3dbda4` → `spec:check ok — specs: 1 · active changes: 0 · archived: 1`; Purpose переписала людина (`e6465e8`). Факт: 53 хв з 180 (`intent.md`); витрати сесій propose і apply не зняті.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
-- [ ] Етап 2 — Task 2.0–2.4 готово (останній зелений `03aba67`, `Tests  5 failed | 36 passed (41)` — червоні лише `TRAP-*`); далі Task 2.5–2.7
+- [ ] Етап 2 — Task 2.0–2.5 готово: зміна A заархівована (`a3dbda4`, `spec:check ok — specs: 1 · active changes: 0 · archived: 1`, `Tests  46 passed (46)`); далі Task 2.6–2.7 (зміна B `add-level-validation`)
 
 ## 3. Команда перевірки
 pnpm install && pnpm hooks:selftest && pnpm check
@@ -28,6 +29,8 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `pnpm pkg set` у pnpm 12.8.1 не приймає `:` у ключі (`ERR_PNPM_PKG_INVALID_PROPERTY_PATH`). Скрипти з `:` додавати в `package.json` вручну.
 - Сесія Task 2.0 (`31be92fe`) працювала в `bypassPermissions`, тож `ask` з `settings.json` не спрацьовує. Режим сесії перевіряти на старті (`"mode"` в `.agent-log/actions.jsonl`).
 - Після `pnpm exec openspec update` обов'язково `pnpm openspec:pin`, інакше `spec:check` червоний.
+- План і `tasks.md` не мають зупинки на червоний коміт після нового тесту (3.1, 4.1) і дають `git commit -am`, який не бере новий файл. Червоний тест комітить людина окремо, через `git add <файли>`.
+- `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Task 2.5: сесія apply робить 4.3 («no spec change», `openspec validate --strict`) і 5.1 (`pnpm check`); потім людина: `/usage`, `/opsx:archive add-core-gameplay`, переписати `## Purpose`, факт проти бюджету в `intent.md`. Якщо сесію apply закрито — у свіжій сесії `/opsx:apply add-core-gameplay` продовжить з першого `[ ]` у `tasks.md`.
+Task 2.6 [ЛЮДИНА]: дописати бюджет зміни B (`add-level-validation`) у `docs/intent.md` до propose.
