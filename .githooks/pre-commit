@@ -1,0 +1,4 @@
+#!/bin/sh
+# Fast gate before each commit: types and the src/core boundary.
+# Tests are not here on purpose: the course asks for a commit with a red test before the green one.
+pnpm typecheck && pnpm boundaries
