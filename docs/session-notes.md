@@ -11,6 +11,7 @@
 - 2026-10-02 — Task 2.0: OpenSpec `1.13.0` (exact), `init --tools claude,codex --profile core`; скрипти day03 за pin `e88669e`; `openspec:pin` переписав 204 голі виклики в 18 файлах; `config.yaml` з плану; 2 рядки `allow` у `settings.json` (агент за дорученням людини). Гейт червоний до pin (147 рядків `bare openspec call`), зелений після: `spec:check ok — specs: 0 · active changes: 0 · archived: 0`. Коміт `7d3c86b`.
 - 2026-10-02 — Task 2.1: бюджет зміни A в `intent.md` (коміт `1e0072d`) до propose. Propose у свіжій сесії: 10 вимог, 13 сценаріїв з id плану, `tasks.md` з Task 2.2 по 2.5, тести першими; `validate --strict` → valid; `spec:check ok — specs: 0 · active changes: 1 · archived: 0`. Людина прийняла 4 відхилення, зокрема нове правило «пастка не спрацьовує в тіку смерті» (autonomy-log, «Відхилення»). Коміт пропозиції `c4485f7`.
 - 2026-10-02 — Task 2.2 (`/opsx:apply`, група 1 `tasks.md`, рівень 3): типи, геометрія, `createWorld` дослівно з плану; червоний `5ad9a65` (`Tests  5 failed (5)`, `not implemented`) → зелений `5402549` (`Tests  9 passed (9)`). Виправлено таблицю autonomy-log (`01adbd3`): рядок #6 розрізав рядок #5.
+- 2026-10-02 — Task 2.3 (група 2): `step`, `replay`, `interactions`, заглушка `traps`, 3 тестові файли і 13 `*.replay.json` дослівно з плану; червоний коміт `f4dd72e` — `Tests  17 failed | 15 passed (32)`, без помилок імпорту.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
@@ -27,4 +28,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - Після `pnpm exec openspec update` обов'язково `pnpm openspec:pin`, інакше `spec:check` червоний.
 
 ## Наступна дія (одна)
-Task 2.3 (група 2 `tasks.md`): сесія apply продовжує 2.1–2.4 і зупиняється на червоному стані `Tests  17 failed | 15 passed (32)`. Якщо сесію apply закрито — у свіжій сесії `/opsx:apply add-core-gameplay` продовжить з першого `[ ]` у `tasks.md`.
+Task 2.4 (група 3 `tasks.md`, фізика): сесія apply робить 3.1–3.2 і зупиняється на `Tests  5 failed | 36 passed (41)` (червоні лише 5 `TRAP-*`). Якщо сесію apply закрито — у свіжій сесії `/opsx:apply add-core-gameplay` продовжить з першого `[ ]` у `tasks.md`.
