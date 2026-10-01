@@ -6,7 +6,7 @@
 
 | # | Дата | Робота | Рівень (план → факт) | Хто вирішував | Докази | Чому саме цей рівень (3 питання) |
 |---|---|---|---|---|---|---|
-| 1 | 2026-10-02 | Task 0.1 каркас, Node, pnpm, залежності | 1 → | людина | Node v24.21.0, pnpm 12.8.1; typescript 7.0.2, vite 8.3.1, vitest 5.0.3, tsx 4.23.15, zod 4.6.5, @types/node 26.6.3; `pnpm-workspace.yaml` → `allowBuilds: esbuild: true` (рішення людини); червоний гейт 2026-10-02 00:29: `tsc --noEmit` чисто, `Tests  3 failed \| 1 passed (4)`, exit 1 | помітимо: `pnpm check` (червоний, потім зелений) і `pnpm dev` у браузері, за хвилини · відкотимо: файли каркаса нові, `git reset --hard 8d1be1e` або видалити їх · переконає: рядок `Tests  3 failed \| 1 passed (4)`, потім `Tests  4 passed (4)`, текст «Trap Runner» на сторінці |
+| 1 | 2026-10-02 | Task 0.1 каркас, Node, pnpm, залежності | 1 → 1 | людина | Node v24.21.0, pnpm 12.8.1; typescript 7.0.2, vite 8.3.1, vitest 5.0.3, tsx 4.23.15, zod 4.6.5, @types/node 26.6.3; `pnpm-workspace.yaml` → `allowBuilds: esbuild: true` (рішення людини); червоний гейт 2026-10-02 00:29: `tsc --noEmit` чисто, `Tests  3 failed \| 1 passed (4)`, exit 1, коміт `3afd550`; зелений гейт 00:30: `Tests  4 passed (4)`, exit 0; `pnpm dev`: текст «Trap Runner» видно, консоль чиста (перевірила людина) | помітимо: `pnpm check` (червоний, потім зелений) і `pnpm dev` у браузері, за хвилини · відкотимо: файли каркаса нові, `git reset --hard 8d1be1e` або видалити їх · переконає: рядок `Tests  3 failed \| 1 passed (4)`, потім `Tests  4 passed (4)`, текст «Trap Runner» на сторінці |
 | 2 | | Task 0.2 харнес (hooks, гейт) | 1 → | людина | | |
 | 3 | | Task 0.3 AGENTS.md, CI | 1 → | людина | | |
 | 4 | | Task 0.4 негативний контроль guard-core | 1 → | людина | | |
