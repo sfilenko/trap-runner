@@ -13,6 +13,7 @@
 - 2026-10-02 — Task 2.2 (`/opsx:apply`, група 1 `tasks.md`, рівень 3): типи, геометрія, `createWorld` дослівно з плану; червоний `5ad9a65` (`Tests  5 failed (5)`, `not implemented`) → зелений `5402549` (`Tests  9 passed (9)`). Виправлено таблицю autonomy-log (`01adbd3`): рядок #6 розрізав рядок #5.
 - 2026-10-02 — Task 2.3 (група 2): `step`, `replay`, `interactions`, заглушка `traps`, 3 тестові файли і 13 `*.replay.json` дослівно з плану; червоний коміт `f4dd72e` — `Tests  17 failed | 15 passed (32)`, без помилок імпорту.
 - 2026-10-02 — Task 2.4 (група 3): `physics.test.ts` червоний `6791fd3` (`8 failed | 1 passed`) → `stepPlayer` зелений `03aba67` (`Tests  5 failed | 36 passed (41)`, червоні лише 5 `TRAP-*`); `PHYS` не змінено. Прогалина плану: 3.1 і 4.1 без зупинки на червоний коміт, а зелений коміт через `-am` не бере новий файл тесту — комітимо червоне окремо і через `git add`.
+- 2026-10-02 — Task 2.5 (група 4): `traps.test.ts` червоний `b95123e` (`5 failed`) → `traps.ts` зелений `cf81fdc` (`Tests  46 passed (46)`). Усі 13 сценаріїв збіглися з поведінкою: коміту `spec: …` (доказ SDD) у зміні A немає — шукати чесний випадок у зміні B або на етапі 3.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
@@ -29,4 +30,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - Після `pnpm exec openspec update` обов'язково `pnpm openspec:pin`, інакше `spec:check` червоний.
 
 ## Наступна дія (одна)
-Task 2.5 (група 4 `tasks.md`, пастки): сесія apply пише `traps.test.ts` (4.1) і зупиняється на червоному для коміту людини; далі 4.2–4.3 і 5.1 (`pnpm check`, 0 failed). Якщо сесію apply закрито — у свіжій сесії `/opsx:apply add-core-gameplay` продовжить з першого `[ ]` у `tasks.md`.
+Task 2.5: сесія apply робить 4.3 («no spec change», `openspec validate --strict`) і 5.1 (`pnpm check`); потім людина: `/usage`, `/opsx:archive add-core-gameplay`, переписати `## Purpose`, факт проти бюджету в `intent.md`. Якщо сесію apply закрито — у свіжій сесії `/opsx:apply add-core-gameplay` продовжить з першого `[ ]` у `tasks.md`.

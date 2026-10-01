@@ -27,8 +27,9 @@ Source of the exact code and tests: `docs/plan/stage-2-core.md`. Copy the code f
 
 - [x] 4.1 Write `tests/unit/traps.test.ts` as in plan Task 2.5 Step 1. Run `pnpm test tests/unit/traps.test.ts`. Expected: FAIL, `5 failed`. Quote the failing lines.
 - [x] 4.2 Implement `fireDueActions`, `checkTriggers` and `applyAction` in `src/core/traps.ts` as in plan Task 2.5 Step 2. Run `pnpm test`. Expected: 0 failed. Stop for the human commit (`feat(core): traps - zone and coin triggers, delays, array order`).
-- [ ] 4.3 If a scenario does not agree with the real behavior, do not change the test first. Change the scenario in `specs/core-gameplay/spec.md` first and report it. The human commits the spec change separately (`spec: <what and why>`). Then change the replay file. Check: `pnpm exec openspec validate add-core-gameplay --strict` exits 0. If all scenarios agree, mark this task done with the note "no spec change".
+- [x] 4.3 If a scenario does not agree with the real behavior, do not change the test first. Change the scenario in `specs/core-gameplay/spec.md` first and report it. The human commits the spec change separately (`spec: <what and why>`). Then change the replay file. Check: `pnpm exec openspec validate add-core-gameplay --strict` exits 0. If all scenarios agree, mark this task done with the note "no spec change".
+  - No spec change. All 13 scenarios pass on the plan code. `validate --strict`: `Change 'add-core-gameplay' is valid`.
 
 ## 5. Final check
 
-- [ ] 5.1 Run `pnpm check` and quote its summary lines. Expected: PASS, `Test Files  7 passed (7)`, `Tests  46 passed (46)` (more tests are acceptable, 0 failed is the rule) and `spec:check ok — specs: 0 · active changes: 1 · archived: 0`.
+- [x] 5.1 Run `pnpm check` and quote its summary lines. Expected: PASS, `Test Files  7 passed (7)`, `Tests  46 passed (46)` (more tests are acceptable, 0 failed is the rule) and `spec:check ok — specs: 0 · active changes: 1 · archived: 0`.
