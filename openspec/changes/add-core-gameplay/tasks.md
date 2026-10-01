@@ -8,7 +8,7 @@ Source of the exact code and tests: `docs/plan/stage-2-core.md`. Copy the code f
   - The stub `src/core/world.ts`. Its `createWorld` throws `not implemented`.
   - Check:  `pnpm typecheck` exits 0 and `pnpm boundaries` reports `0 violations`.
 - [x] 1.2 Write `tests/unit/world.test.ts` as in plan Task 2.2 Step 2. Run `pnpm test tests/unit/world.test.ts`. Expected: FAIL, `5 failed`, reason `createWorld(level-99): not implemented`. Quote the failing lines. Stop for the human commit of the red state.
-- [ ] 1.3 Implement `createWorld` in `src/core/world.ts` as in plan Task 2.2 Step 4. Run `pnpm test tests/unit/world.test.ts`. Expected: `5 passed`. Run `pnpm boundaries`. Expected: `0 violations`. Stop for the human commit (`feat(core): types, geometry, createWorld`).
+- [x] 1.3 Implement `createWorld` in `src/core/world.ts` as in plan Task 2.2 Step 4. Run `pnpm test tests/unit/world.test.ts`. Expected: `5 passed`. Run `pnpm boundaries`. Expected: `0 violations`. Stop for the human commit (`feat(core): types, geometry, createWorld`).
 
 ## 2. Step, replay runner and the 13 scenarios: red (plan Task 2.3)
 
