@@ -1,0 +1,15 @@
+{
+  "scenario": "MOVE-left-edge-01",
+  "level": {
+    "id": "fx-flat",
+    "tiles": [
+      "..........",
+      "..........",
+      "S........G",
+      "##########"
+    ],
+    "traps": []
+  },
+  "inputs": [{"ticks": 10, "left": true}],
+  "final": {"player": {"x": 0}}
+}

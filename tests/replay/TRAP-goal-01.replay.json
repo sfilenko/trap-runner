@@ -1,0 +1,17 @@
+{
+  "scenario": "TRAP-goal-01",
+  "level": {
+    "id": "fx-trap-goal",
+    "tiles": [
+      "..........",
+      "..........",
+      "S.......G.",
+      "##########"
+    ],
+    "traps": [{"id": "t1", "trigger": {"kind": "zone", "rect": [6, 0, 1, 4]}, "action": {"kind": "moveGoal", "to": [0, 0]}, "delayTicks": 0}]
+  },
+  "inputs": [{"ticks": 120, "right": true}],
+  "expect": [{"type": "trapTriggered", "id": "t1"}],
+  "absent": [{"type": "levelComplete"}],
+  "final": {"status": "playing", "goal": {"x": 0, "y": 0}}
+}

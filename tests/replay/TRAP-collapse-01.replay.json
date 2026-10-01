@@ -1,0 +1,15 @@
+{
+  "scenario": "TRAP-collapse-01",
+  "level": {
+    "id": "fx-collapse",
+    "tiles": [
+      "...........",
+      "...........",
+      "S.........G",
+      "###########"
+    ],
+    "traps": [{"id": "t1", "trigger": {"kind": "zone", "rect": [3, 0, 1, 4]}, "action": {"kind": "removeTiles", "rect": [5, 3, 3, 1]}, "delayTicks": 0}]
+  },
+  "inputs": [{"ticks": 120, "right": true}],
+  "expect": [{"type": "trapTriggered", "id": "t1"}, {"type": "died", "cause": "pit"}]
+}

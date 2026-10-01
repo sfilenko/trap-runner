@@ -12,11 +12,11 @@ Source of the exact code and tests: `docs/plan/stage-2-core.md`. Copy the code f
 
 ## 2. Step, replay runner and the 13 scenarios: red (plan Task 2.3)
 
-- [ ] 2.1 Write `src/core/interactions.ts`, the stub `src/core/traps.ts` (empty `fireDueActions`, `checkTriggers`, `applyAction`), `src/core/step.ts` and `src/core/replay.ts`, as in plan Task 2.3 Step 1. Check: `pnpm typecheck` exits 0 and `pnpm boundaries` reports `0 violations`.
-- [ ] 2.2 Write `tests/unit/step.test.ts`, `tests/unit/replay.test.ts` and `tests/replay/replay.test.ts`, as in plan Task 2.3 Step 2. Check: `pnpm typecheck` exits 0.
-- [ ] 2.3 Write the 13 replay files `tests/replay/<id>.replay.json`, as in plan Task 2.3 Step 3. Use one file for each scenario of `specs/core-gameplay/spec.md`, with the same id and the same values. The ids:
+- [x] 2.1 Write `src/core/interactions.ts`, the stub `src/core/traps.ts` (empty `fireDueActions`, `checkTriggers`, `applyAction`), `src/core/step.ts` and `src/core/replay.ts`, as in plan Task 2.3 Step 1. Check: `pnpm typecheck` exits 0 and `pnpm boundaries` reports `0 violations`.
+- [x] 2.2 Write `tests/unit/step.test.ts`, `tests/unit/replay.test.ts` and `tests/replay/replay.test.ts`, as in plan Task 2.3 Step 2. Check: `pnpm typecheck` exits 0.
+- [x] 2.3 Write the 13 replay files `tests/replay/<id>.replay.json`, as in plan Task 2.3 Step 3. Use one file for each scenario of `specs/core-gameplay/spec.md`, with the same id and the same values. The ids:
   `COIN-goal-01`, `MOVE-jump-01`, `MOVE-left-edge-01`, `MOVE-no-autojump-01`, `MOVE-run-right-01`, `MOVE-wall-01`, `PIT-01`, `SPIKE-01`, `TRAP-bait-01`, `TRAP-collapse-01`, `TRAP-goal-01`, `TRAP-goal-death-01`, `TRAP-spikes-01`. Check: `tests/replay/` holds exactly 13 `*.replay.json` files, and each file name matches a scenario id in the spec.
-- [ ] 2.4 Run `pnpm test` and quote the failing lines and the summary line. Expected: `Tests  17 failed | 15 passed (32)`. All 13 replay scenarios fail on behavior (for example `MOVE-run-right-01`: `expected 2 to be 62`, `COIN-goal-01`: `missing {"type":"coinCollected","id":"c3_2"}`). 3 tests in `step.test.ts` and `runReplay stops at the first end of the attempt` also fail. No test fails on an import or a syntax error. Stop for the human commit (`test(core): 13 replay scenarios from add-core-gameplay spec (red)`).
+- [x] 2.4 Run `pnpm test` and quote the failing lines and the summary line. Expected: `Tests  17 failed | 15 passed (32)`. All 13 replay scenarios fail on behavior (for example `MOVE-run-right-01`: `expected 2 to be 62`, `COIN-goal-01`: `missing {"type":"coinCollected","id":"c3_2"}`). 3 tests in `step.test.ts` and `runReplay stops at the first end of the attempt` also fail. No test fails on an import or a syntax error. Stop for the human commit (`test(core): 13 replay scenarios from add-core-gameplay spec (red)`).
 
 ## 3. Player physics (plan Task 2.4)
 

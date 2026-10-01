@@ -1,0 +1,15 @@
+{
+  "scenario": "TRAP-bait-01",
+  "level": {
+    "id": "fx-bait",
+    "tiles": [
+      "...........",
+      "...........",
+      "S..o......G",
+      "###########"
+    ],
+    "traps": [{"id": "t1", "trigger": {"kind": "event", "event": "coinCollected", "id": "c3_2"}, "action": {"kind": "removeTiles", "rect": [5, 3, 2, 1]}, "delayTicks": 0}]
+  },
+  "inputs": [{"ticks": 120, "right": true}],
+  "expect": [{"type": "coinCollected", "id": "c3_2"}, {"type": "trapTriggered", "id": "t1"}, {"type": "died", "cause": "pit"}]
+}

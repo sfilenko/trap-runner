@@ -1,0 +1,15 @@
+{
+  "scenario": "MOVE-run-right-01",
+  "level": {
+    "id": "fx-flat",
+    "tiles": [
+      "..........",
+      "..........",
+      "S........G",
+      "##########"
+    ],
+    "traps": []
+  },
+  "inputs": [{"ticks": 30, "right": true}],
+  "final": {"status": "playing", "player": {"x": 62, "y": 34}}
+}

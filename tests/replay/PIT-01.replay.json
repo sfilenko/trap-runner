@@ -1,0 +1,15 @@
+{
+  "scenario": "PIT-01",
+  "level": {
+    "id": "fx-pit",
+    "tiles": [
+      "..........",
+      "..........",
+      "S........G",
+      "#####....#"
+    ],
+    "traps": []
+  },
+  "inputs": [{"ticks": 120, "right": true}],
+  "expect": [{"type": "died", "cause": "pit"}]
+}

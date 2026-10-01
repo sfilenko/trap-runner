@@ -1,0 +1,15 @@
+{
+  "scenario": "TRAP-spikes-01",
+  "level": {
+    "id": "fx-trap-spikes",
+    "tiles": [
+      "...........",
+      "...........",
+      "S.........G",
+      "###########"
+    ],
+    "traps": [{"id": "t1", "trigger": {"kind": "zone", "rect": [2, 0, 1, 4]}, "action": {"kind": "addSpikes", "rect": [6, 2, 1, 1]}, "delayTicks": 10}]
+  },
+  "inputs": [{"ticks": 120, "right": true}],
+  "expect": [{"type": "trapTriggered", "id": "t1", "tick": 9}, {"type": "died", "cause": "spikes"}]
+}

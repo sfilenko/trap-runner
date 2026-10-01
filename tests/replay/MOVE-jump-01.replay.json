@@ -1,0 +1,15 @@
+{
+  "scenario": "MOVE-jump-01",
+  "level": {
+    "id": "fx-flat",
+    "tiles": [
+      "..........",
+      "..........",
+      "S........G",
+      "##########"
+    ],
+    "traps": []
+  },
+  "inputs": [{"ticks": 1}, {"ticks": 1, "jump": true}, {"ticks": 58}],
+  "final": {"player": {"y": 34, "onGround": true}}
+}

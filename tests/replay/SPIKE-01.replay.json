@@ -1,0 +1,16 @@
+{
+  "scenario": "SPIKE-01",
+  "level": {
+    "id": "fx-spikes",
+    "tiles": [
+      "..........",
+      "..........",
+      "S.....^..G",
+      "##########"
+    ],
+    "traps": []
+  },
+  "inputs": [{"ticks": 60, "right": true}],
+  "expect": [{"type": "died", "cause": "spikes"}],
+  "absent": [{"type": "levelComplete"}]
+}

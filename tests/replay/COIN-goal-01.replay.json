@@ -1,0 +1,16 @@
+{
+  "scenario": "COIN-goal-01",
+  "level": {
+    "id": "fx-coin",
+    "tiles": [
+      "...........",
+      "...........",
+      "S..o......G",
+      "###########"
+    ],
+    "traps": []
+  },
+  "inputs": [{"ticks": 100, "right": true}],
+  "expect": [{"type": "coinCollected", "id": "c3_2"}, {"type": "levelComplete"}],
+  "final": {"status": "complete", "collected": ["c3_2"]}
+}

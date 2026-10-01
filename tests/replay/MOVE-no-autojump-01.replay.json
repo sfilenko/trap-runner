@@ -1,0 +1,15 @@
+{
+  "scenario": "MOVE-no-autojump-01",
+  "level": {
+    "id": "fx-flat",
+    "tiles": [
+      "..........",
+      "..........",
+      "S........G",
+      "##########"
+    ],
+    "traps": []
+  },
+  "inputs": [{"ticks": 5}, {"ticks": 60, "jump": true}],
+  "final": {"player": {"y": 34, "onGround": true}}
+}

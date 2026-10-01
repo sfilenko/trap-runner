@@ -1,0 +1,15 @@
+{
+  "scenario": "MOVE-wall-01",
+  "level": {
+    "id": "fx-wall",
+    "tiles": [
+      "..........",
+      "......#...",
+      "S.....#..G",
+      "##########"
+    ],
+    "traps": []
+  },
+  "inputs": [{"ticks": 60, "right": true}],
+  "final": {"player": {"x": 84}}
+}
