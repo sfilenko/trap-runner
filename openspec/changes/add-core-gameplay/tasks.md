@@ -20,7 +20,7 @@ Source of the exact code and tests: `docs/plan/stage-2-core.md`. Copy the code f
 
 ## 3. Player physics (plan Task 2.4)
 
-- [ ] 3.1 Write `tests/unit/physics.test.ts` as in plan Task 2.4 Step 1. Run `pnpm test tests/unit/physics.test.ts`. Expected: FAIL, `8 failed | 1 passed`. Only the control test `a new press after landing jumps again` passes. Quote the failing lines.
+- [x] 3.1 Write `tests/unit/physics.test.ts` as in plan Task 2.4 Step 1. Run `pnpm test tests/unit/physics.test.ts`. Expected: FAIL, `8 failed | 1 passed`. Only the control test `a new press after landing jumps again` passes. Quote the failing lines.
 - [ ] 3.2 Implement `stepPlayer` in `src/core/physics.ts` as in plan Task 2.4 Step 2. It uses sub-steps of at most 4 px, a jump on a press only, and the level edges. Keep `PHYS`, `PLAYER_W` and `PLAYER_H` unchanged. Run `pnpm test`. Expected: `Tests  5 failed | 36 passed (41)`. Only the 5 `TRAP-*` replay scenarios fail. Stop for the human commit (`feat(core): player physics with sub-steps and edge-triggered jump`).
 
 ## 4. Traps (plan Task 2.5)
