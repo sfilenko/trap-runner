@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The pure, deterministic game core of Trap Runner without enemies. It turns a level and a sequence of input frames into the same World and the same events on every machine.
+This capability is the game core of Trap Runner. The core is pure and deterministic. It has no enemies. For one level and one sequence of input frames, the core gives the same World and the same events on all machines.
 
 Conventions for all requirements and scenarios:
 
