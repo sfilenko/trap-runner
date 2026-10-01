@@ -6,10 +6,12 @@
 
 | # | Дата | Робота | Рівень (план → факт) | Хто вирішував | Докази | Чому саме цей рівень (3 питання) |
 |---|---|---|---|---|---|---|
-| 1 | 2026-10-02 | Task 0.1 каркас, Node, pnpm, залежності | 1 → 1 | людина | Node v24.21.0, pnpm 12.8.1; typescript 7.0.2, vite 8.3.1, vitest 5.0.3, tsx 4.23.15, zod 4.6.5, @types/node 26.6.3; `pnpm-workspace.yaml` → `allowBuilds: esbuild: true` (рішення людини); червоний гейт 2026-10-02 00:29: `tsc --noEmit` чисто, `Tests  3 failed \| 1 passed (4)`, exit 1, коміт `3afd550`; зелений гейт 00:30: `Tests  4 passed (4)`, exit 0; `pnpm dev`: текст «Trap Runner» видно, консоль чиста (перевірила людина) | помітимо: `pnpm check` (червоний, потім зелений) і `pnpm dev` у браузері, за хвилини · відкотимо: файли каркаса нові, `git reset --hard 8d1be1e` або видалити їх · переконає: рядок `Tests  3 failed \| 1 passed (4)`, потім `Tests  4 passed (4)`, текст «Trap Runner» на сторінці |
-| 2 | | Task 0.2 харнес (hooks, гейт) | 1 → | людина | | |
+| 1 | 2026-10-02 | Task 0.1 каркас, Node, pnpm, залежності | 1 → 1* | людина | Node v24.21.0, pnpm 12.8.1; typescript 7.0.2, vite 8.3.1, vitest 5.0.3, tsx 4.23.15, zod 4.6.5, @types/node 26.6.3; `pnpm-workspace.yaml` → `allowBuilds: esbuild: true` (рішення людини); червоний гейт 2026-10-02 00:29: `tsc --noEmit` чисто, `Tests  3 failed \| 1 passed (4)`, exit 1, коміт `3afd550`; зелений гейт 00:30: `Tests  4 passed (4)`, exit 0; `pnpm dev`: текст «Trap Runner» видно, консоль чиста (перевірила людина); коміт `ef629f7` | помітимо: `pnpm check` (червоний, потім зелений) і `pnpm dev` у браузері, за хвилини · відкотимо: файли каркаса нові, `git reset --hard 8d1be1e` або видалити їх · переконає: рядок `Tests  3 failed \| 1 passed (4)`, потім `Tests  4 passed (4)`, текст «Trap Runner» на сторінці |
+| 2 | 2026-10-02 | Task 0.2 харнес (hooks, гейт) | 1 → 1* | людина | pin демо day01: `3925f86cfba58e9f653f46c1d201e5c1d926e656` (файли взято за SHA, не за HEAD; завантажив агент на прохання людини, агент прочитав обидва `.mjs`: лише stdin → append у `.agent-log/`, без мережі й exec); selftest червоний (людина): 6× `FAIL guard-core`, `ENOENT … blocked.jsonl`; зелений 00:42: 27 PASS, `all hook checks passed`, exit 0; `pnpm check`: `check-boundaries: 0 files in src/core, 0 violations`, `Tests  4 passed (4)` | помітимо: `pnpm hooks:selftest` без агента (секунди), потім негативний контроль у Task 0.4 · відкотимо: `git revert` коміту харнесу; hooks вимикаються видаленням блоку `hooks` з `.claude/settings.json` · переконає: selftest червоний до появи `guard-core`, потім 23 PASS і `all hook checks passed` |
 | 3 | | Task 0.3 AGENTS.md, CI | 1 → | людина | | |
 | 4 | | Task 0.4 негативний контроль guard-core | 1 → | людина | | |
+
+\* Task 0.1–0.2 виконано в сесії Claude Code у режимі **auto** (видно в `.agent-log/actions.jsonl`: `"mode":"auto"`), хоча `settings.json` задає `defaultMode: "default"`. Кожен крок ініціювала людина в чаті, але окремі дії агента не підтверджувались. Запуск чужого коду (`hooks-selftest` з `log-action.mjs`) класифікатор auto mode заблокував, і його перший прогін зробила людина. З Task 0.3 сесії працюють у режимі `default`.
 
 ## Зниження рівня (обов'язково фіксувати)
 | Дата | Задача | Було → стало | Причина |
@@ -18,9 +20,12 @@
 ## Впевнені помилки агента
 | Дата | Що агент запропонував | Як помітили (рядок `.agent-log/actions.jsonl`, тест, typecheck) | Що змінили в харнесі після цього |
 |---|---|---|---|
+| 2026-10-02 | Task 0.2 Step 7: агент стверджував, що hooks із нового `.claude/settings.json` запрацюють лише в новій сесії | одразу після запису `settings.json` у поточній сесії з'явився `.agent-log/actions.jsonl` (перший рядок `id` `toolu_01RRGDGwtKjRKg57VvdoZR7N`, 2026-10-01T21:44:35Z) | нічого; висновок: зміна hooks діє одразу, тож правку `settings.json` треба вважати активною з моменту запису |
 
 ## Відхилення від плану
 | Дата | Задача | Що в плані | Що зробили | Чому |
 |---|---|---|---|---|
 | 2026-10-02 | Task 0.1 | autonomy-log створюється в Task 0.3 | створено на початку Task 0.1 | протокол доказів (README, п. 1) вимагає рядок до роботи; «докази заднім числом» — ризик із design.md §12 |
+| 2026-10-02 | Task 0.2 Step 3 | regex заборони імпорту `from\s+["'][^"']*\/(render\|input)\/` | ловить також `from "../render"`, `import "../render/x"`, `import("../input/x")`; +4 перевірки в `hooks-selftest` (23 → 27 PASS) | рев'ю агента знайшло 3 обхідні форми імпорту; зміну контрольного шару доручила людина |
+| 2026-10-02 | Task 0.2 Step 1, 7 | [ЛЮДИНА]: людина завантажує файли курсу і пише `.claude/settings.json` | обидва кроки зробив агент за прямим проханням людини; `settings.json` дослівно з плану, звірено з демо day01 за pin `3925f86` | людина делегувала; рівень лишився 1 (кожну дію ініціювала людина) |
 | 2026-10-02 | Task 0.1 Step 2 | `corepack enable` | _уточнити в людини_ | глобальний yarn 1.22 через npm: `enable` без аргументу чіпає і yarn; старий corepack 0.28.2 падає на ключах підпису npm |

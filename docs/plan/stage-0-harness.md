@@ -462,7 +462,7 @@ pnpm pkg set "scripts.boundaries=node scripts/check-boundaries.mjs" "scripts.hoo
 - [ ] **Step 6: selftest зелений**
 
   Run: `pnpm hooks:selftest`
-  Expected: 23 рядки `PASS`, останній рядок `all hook checks passed`, exit 0.
+  Expected: 27 рядків `PASS`, останній рядок `all hook checks passed`, exit 0. (23 у первісній версії плану; +4 перевірки форм імпорту — див. `docs/autonomy-log.md`, «Відхилення від плану».)
 
   Run: `pnpm check`
   Expected: `check-boundaries: 0 files in src/core, 0 violations`, потім `Tests  4 passed (4)`.
@@ -632,7 +632,7 @@ git commit -m "chore: harness - action log, guard-core hook, boundary gate, hook
 - YYYY-MM-DD — …
 
 ## 2. Чекліст етапів
-- [ ] Етап 0 — `pnpm check` зелений, `pnpm hooks:selftest` 23 PASS, тег `stage-0`
+- [ ] Етап 0 — `pnpm check` зелений, `pnpm hooks:selftest` 27 PASS, тег `stage-0`
 - [ ] Етап 2 — …
 
 ## 3. Команда перевірки

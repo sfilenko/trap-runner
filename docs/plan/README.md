@@ -116,7 +116,7 @@ e2e/smoke.spec.ts  playwright.config.ts                                   Task 5
 Код ядра, тести, валідатор, `check-boundaries`, `guard-core` і `hooks-selftest` з цього плану я прогнав у чернетці (2026-10-01):
 - фінальна версія: `tsc --noEmit` (strict) чисто, **Vitest 76/76** у 10 файлах (Node 24.21);
 - версія етапу 2 (без ворогів): `tsc` чисто, **Vitest 66/66**, результати сценаріїв ті самі, що у фінальної версії;
-- `hooks-selftest`: **23/23 PASS**;
+- `hooks-selftest`: **23/23 PASS** (у Task 0.2 додано 4 перевірки форм імпорту, тепер очікується 27);
 - `level-loop.mjs`: лише `node --check` і перевірка аргументів. **Справжній прогін `claude -p` не робився**, бо він коштує грошей. Його перевірка — Task 4.1;
 - `main.ts`, `draw.ts`: запущено у браузері через Playwright MCP (Vite dev, тестовий рівень). Старт `x = 2, y = 210`; 0.5 с «вправо» → `x = 62` (30 тіків); смерть на шипах → перезапуск, `deaths` росте; HUD і рендер видно. Знахідка: без `<link rel="icon">` браузер дає 404 на `favicon.ico`, і це рядок `error` у консолі. Тому в `index.html` (Task 0.1) є порожня іконка;
 - `e2e/smoke.spec.ts`, `playwright.config.ts`: лише typecheck. Сам Playwright-тест, CI і команди OpenSpec **не запускались**.
