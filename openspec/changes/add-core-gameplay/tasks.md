@@ -2,12 +2,12 @@ Source of the exact code and tests: `docs/plan/stage-2-core.md`. Copy the code f
 
 ## 1. Types, geometry and world: tests first (plan Task 2.2)
 
-- [ ] 1.1 Write these files as in plan Task 2.2 Step 2:
+- [x] 1.1 Write these files as in plan Task 2.2 Step 2:
   - `src/core/types.ts`, `src/core/geometry.ts`, `src/core/events.ts`, `tests/helpers.ts`.
   - The stub `src/core/physics.ts` with `PHYS`, `PLAYER_W`, `PLAYER_H` and an empty `stepPlayer`.
   - The stub `src/core/world.ts`. Its `createWorld` throws `not implemented`.
   - Check:  `pnpm typecheck` exits 0 and `pnpm boundaries` reports `0 violations`.
-- [ ] 1.2 Write `tests/unit/world.test.ts` as in plan Task 2.2 Step 2. Run `pnpm test tests/unit/world.test.ts`. Expected: FAIL, `5 failed`, reason `createWorld(level-99): not implemented`. Quote the failing lines. Stop for the human commit of the red state.
+- [x] 1.2 Write `tests/unit/world.test.ts` as in plan Task 2.2 Step 2. Run `pnpm test tests/unit/world.test.ts`. Expected: FAIL, `5 failed`, reason `createWorld(level-99): not implemented`. Quote the failing lines. Stop for the human commit of the red state.
 - [ ] 1.3 Implement `createWorld` in `src/core/world.ts` as in plan Task 2.2 Step 4. Run `pnpm test tests/unit/world.test.ts`. Expected: `5 passed`. Run `pnpm boundaries`. Expected: `0 violations`. Stop for the human commit (`feat(core): types, geometry, createWorld`).
 
 ## 2. Step, replay runner and the 13 scenarios: red (plan Task 2.3)
