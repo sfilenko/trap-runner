@@ -9,6 +9,7 @@
 - 2026-10-02 — Task 0.3: `AGENTS.md` (чернетка агента, людина прийняла без змін), `CLAUDE.md`, `intent.md` (бюджет: ліміт підписки), pre-commit (`typecheck` + `boundaries`), CI; коміт `ec0ad9e`. Репо https://github.com/sfilenko/trap-runner, CI зелений: https://github.com/sfilenko/trap-runner/actions/runs/36932206630.
 - 2026-10-02 — Task 0.4: спроба 1 — агент відмовився сам через `AGENTS.md`; спроба 2 (свідомо спровокована) — `guard-core` заблокував Write `src/core/spawn.ts`, `id` `toolu_01DvoeyGwr9c3ArCQN4jJ6ER` у `blocked.jsonl` і в Pre без Post. Факт етапу 0: 1 год, 5% ліміту.
 - 2026-10-02 — Task 2.0: OpenSpec `1.13.0` (exact), `init --tools claude,codex --profile core`; скрипти day03 за pin `e88669e`; `openspec:pin` переписав 204 голі виклики в 18 файлах; `config.yaml` з плану; 2 рядки `allow` у `settings.json` (агент за дорученням людини). Гейт червоний до pin (147 рядків `bare openspec call`), зелений після: `spec:check ok — specs: 0 · active changes: 0 · archived: 0`. Коміт `7d3c86b`.
+- 2026-10-02 — Task 2.1: бюджет зміни A в `intent.md` (коміт `1e0072d`) до propose. Propose у свіжій сесії: 10 вимог, 13 сценаріїв з id плану, `tasks.md` з Task 2.2 по 2.5, тести першими; `validate --strict` → valid; `spec:check ok — specs: 0 · active changes: 1 · archived: 0`. Людина прийняла 4 відхилення, зокрема нове правило «пастка не спрацьовує в тіку смерті» (autonomy-log, «Відхилення»).
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
@@ -25,4 +26,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - Після `pnpm exec openspec update` обов'язково `pnpm openspec:pin`, інакше `spec:check` червоний.
 
 ## Наступна дія (одна)
-Task 2.1 Step 2: у свіжій сесії запустити `/opsx:propose add-core-gameplay` з промптом із `docs/plan/stage-2-core.md` (Task 2.1 Step 2). Бюджет зміни A вже в `docs/intent.md`.
+Task 2.2 Step 1: у свіжій сесії запустити `/opsx:apply add-core-gameplay` і йти за `openspec/changes/add-core-gameplay/tasks.md`. Перед apply зафіксувати `/usage` і час (бюджет зміни A в `docs/intent.md`).
