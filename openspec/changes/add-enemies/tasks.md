@@ -12,12 +12,12 @@ If the new test fails before the mutation, or passes on the mutation, stop and r
 
 ## 1. Validator tests for enemies (green at once, proof by mutation)
 
-- [ ] 1.1 Test `a level with enemies passes all checks`: `validateLevel({ ...valid, enemies: [e1] }, solution)` equals `[]`. Mutation: in `levels/level.schema.ts`, delete the line `enemies: z.array(Enemy).optional(),`.
-- [ ] 1.2 Test `enemy ids must be unique`: the level has the enemies `e1` and `{ id: "e1", x: 2, y: 0, patrol: [1, 3], speed: 1 }`. The errors contain `enemies: enemy ids must be unique`. Mutation: in `tools/validate-level.ts`, delete the line `if (enemyIds.size !== enemies.length) errors.push("enemies: enemy ids must be unique");`.
-- [ ] 1.3 Test `an enemy patrol must be inside the level`: the level has the enemy `{ ...e1, x: 9, patrol: [9, 11] }` (11 is not less than the width 11). The errors contain `enemy e1: x must be inside patrol, and patrol must be inside the level`. Mutation: in `tools/validate-level.ts`, change `to < width` to `to <= width`.
-- [ ] 1.4 Test `an enemy x must be inside its patrol`: the level has the enemy `{ ...e1, x: 2 }` (2 is less than the patrol start 7). The errors contain `enemy e1: x must be inside patrol, and patrol must be inside the level`. Mutation: in `tools/validate-level.ts`, delete `from <= e.x && ` from the patrol condition.
-- [ ] 1.5 Test `an enemyStomped trigger must name an existing enemy`: the level has the enemy `e1`, and the trigger of `t1` is `{ kind: "event", event: "enemyStomped", id: "e9" }`. The errors contain `trap t1: enemy e9 does not exist`. Mutation: in `tools/validate-level.ts`, delete the line that pushes `trap ${t.id}: enemy ${tr.id} does not exist`.
-- [ ] 1.6 Run `pnpm test`. Expected: `Tests  85 passed (85)`. Run `git status --short`. Expected: changes only in `tests/unit/validate-level.test.ts` and `.agent-log/`. Stop for the human commit of the tests.
+- [x] 1.1 Test `a level with enemies passes all checks`: `validateLevel({ ...valid, enemies: [e1] }, solution)` equals `[]`. Mutation: in `levels/level.schema.ts`, delete the line `enemies: z.array(Enemy).optional(),`.
+- [x] 1.2 Test `enemy ids must be unique`: the level has the enemies `e1` and `{ id: "e1", x: 2, y: 0, patrol: [1, 3], speed: 1 }`. The errors contain `enemies: enemy ids must be unique`. Mutation: in `tools/validate-level.ts`, delete the line `if (enemyIds.size !== enemies.length) errors.push("enemies: enemy ids must be unique");`.
+- [x] 1.3 Test `an enemy patrol must be inside the level`: the level has the enemy `{ ...e1, x: 9, patrol: [9, 11] }` (11 is not less than the width 11). The errors contain `enemy e1: x must be inside patrol, and patrol must be inside the level`. Mutation: in `tools/validate-level.ts`, change `to < width` to `to <= width`.
+- [x] 1.4 Test `an enemy x must be inside its patrol`: the level has the enemy `{ ...e1, x: 2 }` (2 is less than the patrol start 7). The errors contain `enemy e1: x must be inside patrol, and patrol must be inside the level`. Mutation: in `tools/validate-level.ts`, delete `from <= e.x && ` from the patrol condition.
+- [x] 1.5 Test `an enemyStomped trigger must name an existing enemy`: the level has the enemy `e1`, and the trigger of `t1` is `{ kind: "event", event: "enemyStomped", id: "e9" }`. The errors contain `trap t1: enemy e9 does not exist`. Mutation: in `tools/validate-level.ts`, delete the line that pushes `trap ${t.id}: enemy ${tr.id} does not exist`.
+- [x] 1.6 Run `pnpm test`. Expected: `Tests  85 passed (85)`. Run `git status --short`. Expected: changes only in `tests/unit/validate-level.test.ts` and `.agent-log/`. Stop for the human commit of the tests.
 
 ## 2. Spec check
 
