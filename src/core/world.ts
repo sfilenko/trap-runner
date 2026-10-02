@@ -1,5 +1,6 @@
 import { TILE, type Coin, type LevelDef, type World } from "./types";
 import { PLAYER_H, PLAYER_W } from "./physics";
+import { createEnemies } from "./enemies";
 
 export function createWorld(level: LevelDef): World {
   const grid = level.tiles.map((row) => row.split(""));
@@ -36,6 +37,7 @@ export function createWorld(level: LevelDef): World {
       onGround: false,
       jumpHeld: false,
     },
+    enemies: createEnemies(level.enemies ?? []),
     coins,
     collected: [],
     goal,

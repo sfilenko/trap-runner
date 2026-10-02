@@ -18,7 +18,7 @@ export interface RleInput {
 
 export type TrapTrigger =
   | { kind: "zone"; rect: Rect }
-  | { kind: "event"; event: "coinCollected"; id: string };
+  | { kind: "event"; event: "coinCollected" | "enemyStomped"; id: string };
 
 export type TrapAction =
   | { kind: "removeTiles"; rect: Rect }
@@ -32,9 +32,18 @@ export interface TrapDef {
   delayTicks: number;
 }
 
+export interface EnemyDef {
+  id: string;
+  x: number;
+  y: number;
+  patrol: [from: number, to: number];
+  speed: number;
+}
+
 export interface LevelDef {
   id: string;
   tiles: string[];
+  enemies?: EnemyDef[];
   traps: TrapDef[];
 }
 
@@ -50,6 +59,14 @@ export interface Player extends Box {
   vy: number;
   onGround: boolean;
   jumpHeld: boolean;
+}
+
+export interface Enemy extends Box {
+  id: string;
+  vx: number;
+  minX: number;
+  maxX: number;
+  alive: boolean;
 }
 
 export interface Coin {
@@ -68,6 +85,7 @@ export type DeathCause = "spikes" | "pit" | "enemy";
 export type GameEvent =
   | { tick: number; type: "trapTriggered"; id: string }
   | { tick: number; type: "coinCollected"; id: string }
+  | { tick: number; type: "enemyStomped"; id: string }
   | { tick: number; type: "died"; cause: DeathCause }
   | { tick: number; type: "levelComplete" };
 
@@ -76,6 +94,7 @@ export interface World {
   tick: number;
   grid: string[][];
   player: Player;
+  enemies: Enemy[];
   coins: Coin[];
   collected: string[];
   goal: { x: number; y: number };

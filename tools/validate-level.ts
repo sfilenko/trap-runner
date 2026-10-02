@@ -21,14 +21,22 @@ export function validateLevel(levelJson: unknown, solutionJson: unknown): string
 
   const coinIds = new Set<string>();
   level.tiles.forEach((row, y) => [...row].forEach((c, x) => c === "o" && coinIds.add(`c${x}_${y}`)));
+  const enemies = level.enemies ?? [];
+  const enemyIds = new Set(enemies.map((e) => e.id));
   const inside = ([x, y, w, h]: Rect) => x + w <= width && y + h <= LEVEL_HEIGHT;
 
   const trapIds = level.traps.map((t) => t.id);
   if (new Set(trapIds).size !== trapIds.length) errors.push("traps: trap ids must be unique");
+  if (enemyIds.size !== enemies.length) errors.push("enemies: enemy ids must be unique");
+  for (const e of enemies) {
+    const [from, to] = e.patrol;
+    if (!(from <= e.x && e.x <= to && to < width)) errors.push(`enemy ${e.id}: x must be inside patrol, and patrol must be inside the level`);
+  }
   for (const t of level.traps) {
     const tr = t.trigger;
     if (tr.kind === "zone" && !inside(tr.rect)) errors.push(`trap ${t.id}: trigger rect is outside the level`);
-    if (tr.kind === "event" && !coinIds.has(tr.id)) errors.push(`trap ${t.id}: coin ${tr.id} does not exist`);
+    if (tr.kind === "event" && tr.event === "coinCollected" && !coinIds.has(tr.id)) errors.push(`trap ${t.id}: coin ${tr.id} does not exist`);
+    if (tr.kind === "event" && tr.event === "enemyStomped" && !enemyIds.has(tr.id)) errors.push(`trap ${t.id}: enemy ${tr.id} does not exist`);
     const a = t.action;
     if (a.kind === "moveGoal" ? !inside([a.to[0], a.to[1], 1, 1]) : !inside(a.rect)) errors.push(`trap ${t.id}: action target is outside the level`);
   }
