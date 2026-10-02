@@ -21,10 +21,10 @@ If the new test fails before the mutation, or passes on the mutation, stop and r
 
 ## 2. Spec check
 
-- [ ] 2.1 Run `pnpm exec openspec validate add-enemies --strict`. Expected: the change is valid. Quote the output.
-- [ ] 2.2 Run `pnpm spec:check`. Expected: `spec:check ok — specs: 2 · active changes: 1 · archived: 2`. Quote the output.
-- [ ] 2.3 For each scenario in the delta, check that its replay file or its test title exists. Use `ls tests/replay/<id>.replay.json` for a replay id. Use `grep -n "<title>" <file>` for a test title. For `the stomp wins (…)`, grep the template `the stomp wins (${` in `tests/unit/stomp-vs-side.test.ts`. Quote one line for each scenario.
+- [x] 2.1 Run `pnpm exec openspec validate add-enemies --strict`. Expected: the change is valid. Quote the output.
+- [x] 2.2 Run `pnpm spec:check`. Expected: `spec:check ok — specs: 2 · active changes: 1 · archived: 2`. Quote the output.
+- [x] 2.3 For each scenario in the delta, check that its replay file or its test title exists. Use `ls tests/replay/<id>.replay.json` for a replay id. Use `grep -n "<title>" <file>` for a test title. For `the stomp wins (…)`, grep the template `the stomp wins (${` in `tests/unit/stomp-vs-side.test.ts`. Quote one line for each scenario.
 
 ## 3. Final check
 
-- [ ] 3.1 Run `pnpm check` and quote its summary lines. Expected: exit 0, `Tests  85 passed (85)`, `validate-level: 3 levels, 0 failed` and `spec:check ok — specs: 2 · active changes: 1 · archived: 2`.
+- [x] 3.1 Run `pnpm check` and quote its summary lines. Expected: exit 0, `Tests  85 passed (85)`, `validate-level: 3 levels, 0 failed` and `spec:check ok — specs: 2 · active changes: 1 · archived: 2`.
