@@ -21,7 +21,7 @@
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
-- [x] Етап 2 — `pnpm check` exit 0: `Tests  55 passed (55)`, `validate-level: 0 levels, 0 failed`, `spec:check ok — specs: 2 · active changes: 0 · archived: 2`; архіви `a3dbda4`, `d086e49`; тег `stage-2` — людина після коміту журналів
+- [x] Етап 2 — `pnpm check` exit 0: `Tests  55 passed (55)`, `validate-level: 0 levels, 0 failed`, `spec:check ok — specs: 2 · active changes: 0 · archived: 2`; архіви `a3dbda4`, `d086e49`; тег `stage-2` (`50c6fb7`); CI зелений на Linux: https://github.com/sfilenko/trap-runner/actions/runs/36977314363
 - Відкрите після етапу 2: (1) коміту `spec: <що і чому>` (доказ SDD «спеку змінили, бо реальність не збіглася») ще немає — обидві зміни збіглися з кодом плану; (2) правило `openspec/config.yaml` «id сценарію = replay-файл» не підходить до `level-validation` — звузити окремим комітом, якщо людина погодиться
 
 ## 3. Команда перевірки
