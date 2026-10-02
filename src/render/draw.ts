@@ -49,6 +49,8 @@ export function draw(ctx: CanvasRenderingContext2D, w: World, s: Session): void 
   ctx.fillRect(w.goal.x * TILE + 2, w.goal.y * TILE, TILE - 4, TILE);
   ctx.fillStyle = COLORS.player;
   ctx.fillRect(Math.round(w.player.x), Math.round(w.player.y), w.player.w, w.player.h);
+  ctx.fillStyle = COLORS.enemy;
+  for (const e of w.enemies) if (e.alive) ctx.fillRect(Math.round(e.x), Math.round(e.y), e.w, e.h);
   ctx.restore();
 
   ctx.fillStyle = COLORS.text;
