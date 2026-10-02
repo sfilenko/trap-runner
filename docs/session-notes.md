@@ -18,10 +18,12 @@
 - 2026-10-02 — Task 2.6: бюджет зміни B (`2bc57c5`, ≤ 60 хв) до propose. Propose у свіжій сесії: 9 вимог, 11 сценаріїв (9 тестів плану Task 2.7 + 2 CLI), `tasks.md` з 3 груп; `validate --strict` → valid. Людина прийняла 6 відхилень, зокрема 9 правил без тесту.
 - 2026-10-02 — Task 2.7 (`/opsx:apply`, рівень 3): схема, заглушка і 9 тестів дослівно з плану; червоний `cdc93f7` (`Tests  8 failed | 47 passed (55)`, усі `AssertionError`) → валідатор і CLI зелений `49896cd` (`Tests  55 passed (55)`). Усі сценарії, зокрема тік 42, збіглися з поведінкою: коміту `spec: …` знову немає. CLI під `tsx` на Windows працює: `validate-level: 0 levels, 0 failed`, exit 0; рівень без розв'язку → `FAIL level-90.json`, exit 1. Перша спроба 2.3 (одна команда з `mktemp` і `rm -rf "$TMP"`) відхилена дозволами — розбито на кроки, тимчасовий файл у scratchpad. 3.1: `pnpm check` exit 0, `spec:check ok — specs: 1 · active changes: 1 · archived: 1`; 6/6 задач.
 - 2026-10-02 — Зміна B закрита: archive `d086e49` → `spec:check ok — specs: 2 · active changes: 0 · archived: 2`; Purpose `level-validation` переписав агент за вибором людини (`912676b`, позначено в коміті). Факт: 34 хв з 60, $2.86 (propose + apply). Етап 2: ≈1.7 год з 5 (`intent.md`).
+- 2026-10-02 — Етап 1 (Task 1.1–1.3): «до» (сесія `5b25fa8d`) — 0 `Skill`, PASS з першого `validate:levels`, але прогін не сліпий: агент прочитав текст skill у `docs/plan/stage-1-context.md` і незакомічені журнали. Skill `make-level` дослівно з плану, лінтер STE 0 порушень, окремий коміт `4db3375`. «Після» (сесія `7011e9a7`) — перша дія `Skill` `make-level` (`toolu_01BVa9gr7JHWwedz4p4db7jW`), PASS з першої спроби. `/context`: Skills 79 · 9.6k → 80 · 9.7k, Free space без змін. Третя колонка — `docs/context-log.md`.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
 - [x] Етап 2 — `pnpm check` exit 0: `Tests  55 passed (55)`, `validate-level: 0 levels, 0 failed`, `spec:check ok — specs: 2 · active changes: 0 · archived: 2`; архіви `a3dbda4`, `d086e49`; тег `stage-2` (`50c6fb7`); CI зелений на Linux: https://github.com/sfilenko/trap-runner/actions/runs/36977314363
+- [x] Етап 1 — `docs/context-log.md` з трьома колонками; доказ «після» — рядок `"tool":"Skill"` (`toolu_01BVa9gr7JHWwedz4p4db7jW`, 08:09:02Z); тег `stage-1`
 - Відкрите після етапу 2: (1) коміту `spec: <що і чому>` (доказ SDD «спеку змінили, бо реальність не збіглася») ще немає — обидві зміни збіглися з кодом плану; (2) правило `openspec/config.yaml` «id сценарію = replay-файл» не підходить до `level-validation` — звузити окремим комітом, якщо людина погодиться
 
 ## 3. Команда перевірки
@@ -34,7 +36,9 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - Сесія Task 2.0 (`31be92fe`) працювала в `bypassPermissions`, тож `ask` з `settings.json` не спрацьовує. Режим сесії перевіряти на старті (`"mode"` в `.agent-log/actions.jsonl`).
 - Після `pnpm exec openspec update` обов'язково `pnpm openspec:pin`, інакше `spec:check` червоний.
 - План і `tasks.md` не мають зупинки на червоний коміт після нового тесту (3.1, 4.1) і дають `git commit -am`, який не бере новий файл. Червоний тест комітить людина окремо, через `git add <файли>`.
+- Свіжа сесія читає все в робочій копії: план (`docs/plan/`), незакомічені журнали, `git diff`. Для чистого контрольного прогону ховати не лише `session-notes.md`.
+- `.agent-log/actions.jsonl` не пише назву skill у рядку `Skill` і обрізає `cmd` до 200 символів. Назву skill брати з транскрипту сесії (`~/.claude/projects/<проєкт>/<session>.jsonl`).
 - `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Етап 1 (порядок 3 у `docs/plan/README.md`): прочитати `docs/plan/stage-1-context.md` і почати з першої задачі.
+Етап 5a (порядок 4 у `docs/plan/README.md`): прочитати `docs/plan/stage-5a-shell.md` і почати з першої задачі.
