@@ -33,4 +33,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Task 2.6 [ЛЮДИНА]: дописати бюджет зміни B (`add-level-validation`) у `docs/intent.md` до propose.
+Task 2.6 Step 2: у свіжій сесії запустити `/opsx:propose add-level-validation` з промптом із `docs/plan/stage-2-core.md` (Task 2.6 Step 2); перед `/exit` зняти `/usage`. Бюджет зміни B вже в `docs/intent.md`.
