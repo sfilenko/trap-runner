@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This capability is the gate for Trap Runner levels. It checks the level file and the structure of the level. It also runs the recorded solution on the real core and proves that the solution completes the level.
+This capability decides whether a level file may enter the game. It checks the format and the structure of the level. Then it runs the recorded solution on the real core. The run proves that a player can finish the level with this solution, trigger a trap and collect a coin.
 
 Conventions for all requirements and scenarios:
 
