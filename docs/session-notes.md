@@ -19,6 +19,7 @@
 - 2026-10-02 — Task 2.7 (`/opsx:apply`, рівень 3): схема, заглушка і 9 тестів дослівно з плану; червоний `cdc93f7` (`Tests  8 failed | 47 passed (55)`, усі `AssertionError`) → валідатор і CLI зелений `49896cd` (`Tests  55 passed (55)`). Усі сценарії, зокрема тік 42, збіглися з поведінкою: коміту `spec: …` знову немає. CLI під `tsx` на Windows працює: `validate-level: 0 levels, 0 failed`, exit 0; рівень без розв'язку → `FAIL level-90.json`, exit 1. Перша спроба 2.3 (одна команда з `mktemp` і `rm -rf "$TMP"`) відхилена дозволами — розбито на кроки, тимчасовий файл у scratchpad. 3.1: `pnpm check` exit 0, `spec:check ok — specs: 1 · active changes: 1 · archived: 1`; 6/6 задач.
 - 2026-10-02 — Зміна B закрита: archive `d086e49` → `spec:check ok — specs: 2 · active changes: 0 · archived: 2`; Purpose `level-validation` переписав агент за вибором людини (`912676b`, позначено в коміті). Факт: 34 хв з 60, $2.86 (propose + apply). Етап 2: ≈1.7 год з 5 (`intent.md`).
 - 2026-10-02 — Етап 1 (Task 1.1–1.3): «до» (сесія `5b25fa8d`) — 0 `Skill`, PASS з першого `validate:levels`, але прогін не сліпий: агент прочитав текст skill у `docs/plan/stage-1-context.md` і незакомічені журнали. Skill `make-level` дослівно з плану, лінтер STE 0 порушень, окремий коміт `4db3375`. «Після» (сесія `7011e9a7`) — перша дія `Skill` `make-level` (`toolu_01BVa9gr7JHWwedz4p4db7jW`), PASS з першої спроби. `/context`: Skills 79 · 9.6k → 80 · 9.7k, Free space без змін. Третя колонка — `docs/context-log.md`.
+- 2026-10-02 — Task 5a.1 (рівень 2 — рішення людини, хоча `AGENTS.md` поза OpenSpec дає 1): `keyboard.ts`, `camera.ts`, `core/session.ts`, `shell.test.ts` дослівно з плану; червоний `a55dac2` (`Tests  7 failed | 4 passed (11)`, усі `AssertionError`) → зелений `82b1065` (`Tests  66 passed (66)`). Тест blur проходив на заглушці — мутація `held.clear()` → `{}` зробила його червоним (`1 failed | 10 passed`), файл повернуто.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
@@ -41,4 +42,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Етап 5a (порядок 4 у `docs/plan/README.md`): прочитати `docs/plan/stage-5a-shell.md` і почати з першої задачі.
+Етап 5a, Task 5a.2 (рендер і ігровий цикл) з `docs/plan/stage-5a-shell.md`.
