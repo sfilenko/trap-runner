@@ -15,6 +15,7 @@
 - 2026-10-02 — Task 2.4 (група 3): `physics.test.ts` червоний `6791fd3` (`8 failed | 1 passed`) → `stepPlayer` зелений `03aba67` (`Tests  5 failed | 36 passed (41)`, червоні лише 5 `TRAP-*`); `PHYS` не змінено. Прогалина плану: 3.1 і 4.1 без зупинки на червоний коміт, а зелений коміт через `-am` не бере новий файл тесту — комітимо червоне окремо і через `git add`.
 - 2026-10-02 — Task 2.5 (група 4): `traps.test.ts` червоний `b95123e` (`5 failed`) → `traps.ts` зелений `cf81fdc` (`Tests  46 passed (46)`). Усі 13 сценаріїв збіглися з поведінкою: коміту `spec: …` (доказ SDD) у зміні A немає — шукати чесний випадок у зміні B або на етапі 3.
 - 2026-10-02 — Зміна A закрита: 4.3 «no spec change», 5.1 `pnpm check` зелений (`72dc0b4`); archive `a3dbda4` → `spec:check ok — specs: 1 · active changes: 0 · archived: 1`; Purpose переписала людина (`e6465e8`). Факт: 53 хв з 180 (`intent.md`); витрати сесій propose і apply не зняті.
+- 2026-10-02 — Task 2.6: бюджет зміни B (`2bc57c5`, ≤ 60 хв) до propose. Propose у свіжій сесії: 9 вимог, 11 сценаріїв (9 тестів плану Task 2.7 + 2 CLI), `tasks.md` з 3 груп; `validate --strict` → valid. Людина прийняла 6 відхилень, зокрема 9 правил без тесту.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
@@ -33,4 +34,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Task 2.6 Step 2: у свіжій сесії запустити `/opsx:propose add-level-validation` з промптом із `docs/plan/stage-2-core.md` (Task 2.6 Step 2); перед `/exit` зняти `/usage`. Бюджет зміни B вже в `docs/intent.md`.
+Task 2.7: у свіжій сесії `/opsx:apply add-level-validation` і йти за `openspec/changes/add-level-validation/tasks.md`; перед `/exit` зняти `/usage`. На червоному коміті 1.2 додати також `tasks.md`. Рядки `allow` для `validate:levels` (2.2) додає людина.
