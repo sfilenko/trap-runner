@@ -2,8 +2,8 @@ Source of the exact code and tests: `docs/plan/stage-2-core.md` Task 2.7. Copy t
 
 ## 1. Schema, stub and the 9 tests: red (plan Task 2.7 Step 2)
 
-- [ ] 1.1 Write `levels/level.schema.ts` and the stub `tools/validate-level.ts` (it returns `[]`), as in plan Task 2.7 Step 2. Check: `pnpm typecheck` exits 0 and `pnpm boundaries` reports `0 violations`.
-- [ ] 1.2 Write `tests/unit/validate-level.test.ts` as in plan Task 2.7 Step 2. Keep the 9 test titles word for word (design D7). Each title must be equal to the text after the id in one scenario heading of `specs/level-validation/spec.md`. Run `pnpm test tests/unit/validate-level.test.ts`. Expected: FAIL, `8 failed | 1 passed`. Only `a valid level with a working solution has no errors` passes. Each failure is an `AssertionError`, not an import error or a syntax error. Quote the failing lines. Then run `pnpm test`. Expected: `Tests  8 failed | 47 passed (55)`. Stop for the human commit of the red state (`git add levels/level.schema.ts tools/validate-level.ts tests/unit/validate-level.test.ts`).
+- [x] 1.1 Write `levels/level.schema.ts` and the stub `tools/validate-level.ts` (it returns `[]`), as in plan Task 2.7 Step 2. Check: `pnpm typecheck` exits 0 and `pnpm boundaries` reports `0 violations`.
+- [x] 1.2 Write `tests/unit/validate-level.test.ts` as in plan Task 2.7 Step 2. Keep the 9 test titles word for word (design D7). Each title must be equal to the text after the id in one scenario heading of `specs/level-validation/spec.md`. Run `pnpm test tests/unit/validate-level.test.ts`. Expected: FAIL, `8 failed | 1 passed`. Only `a valid level with a working solution has no errors` passes. Each failure is an `AssertionError`, not an import error or a syntax error. Quote the failing lines. Then run `pnpm test`. Expected: `Tests  8 failed | 47 passed (55)`. Stop for the human commit of the red state (`git add levels/level.schema.ts tools/validate-level.ts tests/unit/validate-level.test.ts`).
 
 ## 2. Validator and CLI (plan Task 2.7 Step 3)
 
