@@ -16,6 +16,7 @@
 - 2026-10-02 — Task 2.5 (група 4): `traps.test.ts` червоний `b95123e` (`5 failed`) → `traps.ts` зелений `cf81fdc` (`Tests  46 passed (46)`). Усі 13 сценаріїв збіглися з поведінкою: коміту `spec: …` (доказ SDD) у зміні A немає — шукати чесний випадок у зміні B або на етапі 3.
 - 2026-10-02 — Зміна A закрита: 4.3 «no spec change», 5.1 `pnpm check` зелений (`72dc0b4`); archive `a3dbda4` → `spec:check ok — specs: 1 · active changes: 0 · archived: 1`; Purpose переписала людина (`e6465e8`). Факт: 53 хв з 180 (`intent.md`); витрати сесій propose і apply не зняті.
 - 2026-10-02 — Task 2.6: бюджет зміни B (`2bc57c5`, ≤ 60 хв) до propose. Propose у свіжій сесії: 9 вимог, 11 сценаріїв (9 тестів плану Task 2.7 + 2 CLI), `tasks.md` з 3 груп; `validate --strict` → valid. Людина прийняла 6 відхилень, зокрема 9 правил без тесту.
+- 2026-10-02 — Task 2.7 (`/opsx:apply`, рівень 3): схема, заглушка і 9 тестів дослівно з плану; червоний `cdc93f7` (`Tests  8 failed | 47 passed (55)`, усі `AssertionError`) → валідатор і CLI зелений `49896cd` (`Tests  55 passed (55)`). Усі сценарії, зокрема тік 42, збіглися з поведінкою: коміту `spec: …` знову немає. CLI під `tsx` на Windows працює: `validate-level: 0 levels, 0 failed`, exit 0; рівень без розв'язку → `FAIL level-90.json`, exit 1. Перша спроба 2.3 (одна команда з `mktemp` і `rm -rf "$TMP"`) відхилена дозволами — розбито на кроки, тимчасовий файл у scratchpad. 3.1: `pnpm check` exit 0, `spec:check ok — specs: 1 · active changes: 1 · archived: 1`; 6/6 задач.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
@@ -34,4 +35,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Task 2.7: у свіжій сесії `/opsx:apply add-level-validation` і йти за `openspec/changes/add-level-validation/tasks.md`; перед `/exit` зняти `/usage`. На червоному коміті 1.2 додати також `tasks.md`. Рядки `allow` для `validate:levels` (2.2) додає людина.
+Task 2.7 Step 5 [ЛЮДИНА]: закомітити `tasks.md` (3.1), зняти `/usage`, потім `/opsx:archive add-level-validation` → `pnpm spec:check` має дати `archived: 2`; тег `stage-2`.

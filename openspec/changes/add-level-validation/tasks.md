@@ -17,4 +17,4 @@ Source of the exact code and tests: `docs/plan/stage-2-core.md` Task 2.7. Copy t
 
 ## 3. Final check
 
-- [ ] 3.1 Run `pnpm check` and quote its summary lines. Expected: exit 0, `Test Files  8 passed (8)`, `Tests  55 passed (55)` (more tests are acceptable, 0 failed is the rule), `validate-level: 0 levels, 0 failed` and `spec:check ok — specs: 1 · active changes: 1 · archived: 1`.
+- [x] 3.1 Run `pnpm check` and quote its summary lines. Expected: exit 0, `Test Files  8 passed (8)`, `Tests  55 passed (55)` (more tests are acceptable, 0 failed is the rule), `validate-level: 0 levels, 0 failed` and `spec:check ok — specs: 1 · active changes: 1 · archived: 1`.
