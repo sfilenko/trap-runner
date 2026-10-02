@@ -1,4 +1,7 @@
 import { TILE, type Enemy, type EnemyDef, type World } from "./types";
+import { overlaps } from "./geometry";
+import { die } from "./events";
+import { PHYS } from "./physics";
 
 export const ENEMY_W = 14;
 export const ENEMY_H = 14;
@@ -20,9 +23,35 @@ export function createEnemies(defs: EnemyDef[]): Enemy[] {
 }
 
 // Moves each live enemy by vx and turns it at minX / maxX.
-export function moveEnemies(w: World): void {}
+export function moveEnemies(w: World): void {
+  for (const e of w.enemies) {
+    if (!e.alive) continue;
+    e.x += e.vx;
+    if (e.x >= e.maxX) {
+      e.x = e.maxX;
+      e.vx = -Math.abs(e.vx);
+    } else if (e.x <= e.minX) {
+      e.x = e.minX;
+      e.vx = Math.abs(e.vx);
+    }
+  }
+}
 
 // Stomp: the player falls now (vy > 0), and one tick ago the player's bottom was at or above the enemy's top.
 // A stomp kills the enemy, sets the player's vy to PHYS.stompBounce and emits enemyStomped.
 // Any other contact with a live enemy kills the player (cause "enemy"). A stomp beats a side hit in the same tick.
-export function resolveEnemyContacts(w: World, prevBottom: number): void {}
+export function resolveEnemyContacts(w: World, prevBottom: number): void {
+  const p = w.player;
+  const hits = w.enemies.filter((e) => e.alive && overlaps(p, e));
+  if (hits.length === 0) return;
+  const stomped = p.vy > 0 ? hits.filter((e) => prevBottom <= e.y) : [];
+  if (stomped.length === 0) {
+    die(w, "enemy");
+    return;
+  }
+  for (const e of stomped) {
+    e.alive = false;
+    w.events.push({ tick: w.tick, type: "enemyStomped", id: e.id });
+  }
+  p.vy = PHYS.stompBounce;
+}
