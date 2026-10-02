@@ -30,6 +30,7 @@
       "Bash(git push *)"
     ]
   },
+  "enabledMcpjsonServers": ["playwright"],
   "hooks": {
     "PreToolUse": [
       {
