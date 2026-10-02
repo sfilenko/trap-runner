@@ -28,7 +28,7 @@
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
 - [x] Етап 2 — `pnpm check` exit 0: `Tests  55 passed (55)`, `validate-level: 0 levels, 0 failed`, `spec:check ok — specs: 2 · active changes: 0 · archived: 2`; архіви `a3dbda4`, `d086e49`; тег `stage-2` (`50c6fb7`); CI зелений на Linux: https://github.com/sfilenko/trap-runner/actions/runs/36977314363
 - [x] Етап 1 — `docs/context-log.md` з трьома колонками; доказ «після» — рядок `"tool":"Skill"` (`toolu_01BVa9gr7JHWwedz4p4db7jW`, 08:09:02Z); тег `stage-1`
-- [x] Етап 5a — `pnpm check` exit 0: `Tests  66 passed (66)`, `PASS level-01.json`, `validate-level: 1 levels, 0 failed`; коміти `a55dac2` → `82b1065`, `4c57bf1`, `c004dd6`, `1b66c29`; MCP-доказ — сесія `95e4dcae`, `toolu_01LdUGgfM1etz5QbqY7RpULY`; тег `stage-5a`
+- [x] Етап 5a — `pnpm check` exit 0: `Tests  66 passed (66)`, `PASS level-01.json`, `validate-level: 1 levels, 0 failed`; коміти `a55dac2` → `82b1065`, `4c57bf1`, `c004dd6`, `1b66c29`; MCP-доказ — сесія `95e4dcae`, `toolu_01LdUGgfM1etz5QbqY7RpULY`; тег `stage-5a`; CI зелений на Linux: https://github.com/sfilenko/trap-runner/actions/runs/37041148310
 - Відкрите після етапу 2: (1) коміту `spec: <що і чому>` (доказ SDD «спеку змінили, бо реальність не збіглася») ще немає — обидві зміни збіглися з кодом плану; (2) правило `openspec/config.yaml` «id сценарію = replay-файл» не підходить до `level-validation` — звузити окремим комітом, якщо людина погодиться
 
 ## 3. Команда перевірки
