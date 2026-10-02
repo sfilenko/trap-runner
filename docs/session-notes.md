@@ -26,6 +26,7 @@
 - 2026-10-02 — Task 3.1–3.2 (сесія orchestrator `08110719`, `bypassPermissions`): вимоги і DAG `ef545cd` (FR-2 і DAG правлені під STE, DAG у code block — рішення людини); контракт C0 `2aefcda` дослівно з плану, тег `contract-c0`, `Tests  66 passed (66)`. Бюджет етапу 3 в `intent.md` до fan-out.
 - 2026-10-02 — Task 3.3: брифи `cef8421`; worktrees від `cef8421`, а не від `contract-c0` (у дереві тегу брифів немає — рішення людини). Worker A (`b729724d`): червоний `1c22360` (`7 failed`, усі `AssertionError`) → зелений `d31c5e5` (`76 passed`), 0 repair. Worker B (`5cb678de`): level-02 56×15 і level-03 64×15 `37def98`, 1 repair. Обидва зупинялися перед комітом і не чіпали `session-notes.md`.
 - 2026-10-02 — Task 3.4–3.5: `game-checker` `b318dc1` (+ правило «не читати `docs/plan/` і `brief-*.md`»); join `9af5b43` без конфліктів, рендер ворогів `bdef7a5`; checker (`a3668d3a`) у чистому worktree — F1–F3, N1, 3 контрприклади, підтверджені на `step()`. Рішення людини — `docs/stage3/decisions.md`; тести за #1, #3, #4 — `60e679f` (зелені одразу, доказ мутаціями M1–M3); ворог у level-03 і розв'язок людини — `290bfca`. Еталон `resolveEnemyContacts` у плані порушує `design.md` §6 — «Впевнені помилки агента». Факт: ≈2.75 год з 4, $18.63 (`docs/stage3/costs.md`).
+- 2026-10-02/03 — Зміна C `add-enemies` (рішення #6 етапу 3, спека за реальністю): бюджет `231e580`; propose `f7c0df00` → **`spec:` коміт `77dda70`** (`level-validation` казала «`enemies` is an error», контракт C0 його приймає) — перший доказ SDD; apply `5622942c`: 5 тестів валідатора `3312a1b` (зелені одразу, кожен червоний на своїй мутації), `ce3ad7b`; archive `4d8f233`, `archived: 3`, `Tests  85 passed (85)`. Purpose: сесія archive правила сама (порушила промпт), абзац про ворогів дописав orchestrator за дорученням людини. 9 відкритих питань design ↔ код — `openspec/changes/archive/2026-10-03-add-enemies/design.md`. Факт: 33 хв з 60, $6.66.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
@@ -33,12 +34,14 @@
 - [x] Етап 1 — `docs/context-log.md` з трьома колонками; доказ «після» — рядок `"tool":"Skill"` (`toolu_01BVa9gr7JHWwedz4p4db7jW`, 08:09:02Z); тег `stage-1`
 - [x] Етап 5a — `pnpm check` exit 0: `Tests  66 passed (66)`, `PASS level-01.json`, `validate-level: 1 levels, 0 failed`; коміти `a55dac2` → `82b1065`, `4c57bf1`, `c004dd6`, `1b66c29`; MCP-доказ — сесія `95e4dcae`, `toolu_01LdUGgfM1etz5QbqY7RpULY`; тег `stage-5a`; CI зелений на Linux: https://github.com/sfilenko/trap-runner/actions/runs/37041148310
 - [x] Етап 3 — `pnpm check` exit 0: `Tests  80 passed (80)`, `validate-level: 3 levels, 0 failed`; контракт `contract-c0` (`2aefcda`) до fan-out; worker A `1c22360` → `d31c5e5`, worker B `37def98`; join `9af5b43`; звіт checker'а `docs/stage3/checker-report.md`; рішення людини `docs/stage3/decisions.md`; витрати `docs/stage3/costs.md`; тег `stage-3` (`0338c80`); CI зелений на Linux (`aace8c3`): https://github.com/sfilenko/trap-runner/actions/runs/37061263263
-- Відкрите після етапу 2: (1) коміту `spec: <що і чому>` (доказ SDD «спеку змінили, бо реальність не збіглася») ще немає — обидві зміни збіглися з кодом плану; (2) правило `openspec/config.yaml` «id сценарію = replay-файл» не підходить до `level-validation` — звузити окремим комітом, якщо людина погодиться
+- Відкрите після етапу 2: (1) ~~коміту `spec:` ще немає~~ — закрито: `77dda70` (зміна C); (2) правило `openspec/config.yaml` «id сценарію = replay-файл» не підходить до `level-validation` — звузити окремим комітом, якщо людина погодиться
 
 ## 3. Команда перевірки
 pnpm install && pnpm hooks:selftest && pnpm check
 
 ## Що не працює / застереження
+- Сесія archive OpenSpec може сама правити `## Purpose`, навіть коли промпт пропозиції це забороняє. Перед комітом archive дивитися `git diff openspec/specs` на рядки Purpose.
+- `spec:` — лише для коміту, де спеку змінено через розбіжність з реальністю. Коміти галочок `tasks.md` — `chore(openspec)`.
 - Етап 3: worktree від тегу контракту не має документів, створених після тегу (брифи). Worktrees робити від коміту брифів; код перевіряти `git diff --quiet <тег> <коміт> -- src tests levels tools`.
 - `git worktree remove --force` на Windows у pnpm-проєкті падає з `Directory not empty`: пакети верхнього рівня в `node_modules` — junction. Git знімає worktree з реєстру, але каталог лишається. Дочищати `rm -rf <каталог>` (людина; junction вказують усередину того самого каталогу, store `D:\.pnpm-store` не зачіпається).
 - Журнали hook'ів у worktrees не комітяться (workers їх свідомо не додають). Перед `git worktree remove --force` копіювати нові рядки в `.agent-log/stage3/` — інакше докази сесій workers зникають.
@@ -57,4 +60,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Рішення #6 етапу 3 (`docs/stage3/decisions.md`): OpenSpec-зміна для ворогів — спека `core-gameplay` каже «It has no enemies», сценаріїв для `ENEMY-*` немає. Це кандидат на відкритий доказ SDD «спеку змінили, бо реальність не збіглася». Після неї — етап 4 (`docs/plan/stage-4-loop.md`).
+Рішення людини щодо 9 відкритих питань зміни C (`openspec/changes/archive/2026-10-03-add-enemies/design.md`, «Open Questions»). Пропозиція orchestrator: OQ 1 — виправити `design.md` §6 на «на рівні або вище»; OQ 3 і 9 (`y` ворога поза рівнем, зайві ключі ворога) — окрема зміна з **червоним** тестом; OQ 2, 4–8 — дописати в `design.md` §5–§6 без зміни коду. Після цього — етап 4 (`docs/plan/stage-4-loop.md`).
