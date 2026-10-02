@@ -22,17 +22,20 @@
 - 2026-10-02 — Task 5a.1 (рівень 2 — рішення людини, хоча `AGENTS.md` поза OpenSpec дає 1): `keyboard.ts`, `camera.ts`, `core/session.ts`, `shell.test.ts` дослівно з плану; червоний `a55dac2` (`Tests  7 failed | 4 passed (11)`, усі `AssertionError`) → зелений `82b1065` (`Tests  66 passed (66)`). Тест blur проходив на заглушці — мутація `held.clear()` → `{}` зробила його червоним (`1 failed | 10 passed`), файл повернуто.
 - 2026-10-02 — Task 5a.2 (рівень 2): `draw.ts` і повна заміна `main.ts` дослівно з плану; коміт `4c57bf1`, `pnpm check` exit 0 (`Tests  66 passed (66)`). У браузері не перевірено: без `levels/level-01.json` гра кидає `No levels found`.
 - 2026-10-02 — Task 5a.3 (рівень 1, зниження з 2): `level-01.json` 48×15 — чернетка агента (skill `make-level`) за дорученням людини, прийнята без змін; розв'язок записала людина клавішею `R`; `PHYS` не змінено. Коміт `c004dd6`: `PASS level-01.json`, обидві пастки і 2 монети в розв'язку; `pnpm check` exit 0.
+- 2026-10-02 — Task 5a.4 (рівень 1 конфіг / 2 використання): `.mcp.json` з `@playwright/mcp@0.0.83` і `enabledMcpjsonServers` вніс агент за дорученням людини, коміт `1b66c29`. Свіжа сесія `95e4dcae` прочитала `window.__game`: `x = 2, y = 210`, рівень 1; 3 виклики `mcp__playwright__*` з Post. Глобальний `playwright` (`@latest`) має ті самі назви інструментів, тому проєктне джерело доведено списком процесів: у `claude.exe` сесії `95e4dcae` лише дочірній `@playwright/mcp@0.0.83`.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
 - [x] Етап 2 — `pnpm check` exit 0: `Tests  55 passed (55)`, `validate-level: 0 levels, 0 failed`, `spec:check ok — specs: 2 · active changes: 0 · archived: 2`; архіви `a3dbda4`, `d086e49`; тег `stage-2` (`50c6fb7`); CI зелений на Linux: https://github.com/sfilenko/trap-runner/actions/runs/36977314363
 - [x] Етап 1 — `docs/context-log.md` з трьома колонками; доказ «після» — рядок `"tool":"Skill"` (`toolu_01BVa9gr7JHWwedz4p4db7jW`, 08:09:02Z); тег `stage-1`
+- [x] Етап 5a — `pnpm check` exit 0: `Tests  66 passed (66)`, `PASS level-01.json`, `validate-level: 1 levels, 0 failed`; коміти `a55dac2` → `82b1065`, `4c57bf1`, `c004dd6`, `1b66c29`; MCP-доказ — сесія `95e4dcae`, `toolu_01LdUGgfM1etz5QbqY7RpULY`; тег `stage-5a`
 - Відкрите після етапу 2: (1) коміту `spec: <що і чому>` (доказ SDD «спеку змінили, бо реальність не збіглася») ще немає — обидві зміни збіглися з кодом плану; (2) правило `openspec/config.yaml` «id сценарію = replay-файл» не підходить до `level-validation` — звузити окремим комітом, якщо людина погодиться
 
 ## 3. Команда перевірки
 pnpm install && pnpm hooks:selftest && pnpm check
 
 ## Що не працює / застереження
+- HUD нечитабельний: `draw.ts` пише `8px monospace` на канвасі 320×240, а CSS розтягує його до 960×720 з `image-rendering: pixelated` — кирилиця розмазана (знахідка агента сесії `95e4dcae` за скріншотом). Читабельність автоматично не перевіряється (`design.md` §7), рішення — за людиною.
 - `pnpm agent:log` рахує як «proposed but not executed» також `AskUserQuestion`, `Skill`, `ScheduleWakeup` (у них немає Post-подій) і команду, що ще виконується. Справжні блоки hook — лише в `.agent-log/blocked.jsonl`.
 - `session-notes.md` читає кожна свіжа сесія. Не писати сюди підказок, які псують контрольний експеримент.
 - `pnpm pkg set` у pnpm 12.8.1 не приймає `:` у ключі (`ERR_PNPM_PKG_INVALID_PROPERTY_PATH`). Скрипти з `:` додавати в `package.json` вручну.
@@ -44,4 +47,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Етап 5a, Task 5a.4: проєктний `.mcp.json` з Playwright MCP (pin версії), доказ динамічного контексту, тег `stage-5a`.
+Етап 3 (порядок 5 у `docs/plan/README.md`): прочитати `docs/plan/stage-3-orchestration.md` і почати з першої задачі.
