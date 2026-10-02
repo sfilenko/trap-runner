@@ -1,0 +1,17 @@
+{
+  "scenario": "ENEMY-goal-death-01",
+  "level": {
+    "id": "fx-enemy-goal",
+    "tiles": [
+      "..........",
+      "..........",
+      "S........G",
+      "##########"
+    ],
+    "enemies": [{"id": "e1", "x": 9, "y": 2, "patrol": [9, 9], "speed": 1}],
+    "traps": []
+  },
+  "inputs": [{"ticks": 100, "right": true}],
+  "expect": [{"type": "died", "cause": "enemy", "tick": 65}],
+  "absent": [{"type": "levelComplete"}, {"type": "enemyStomped"}]
+}
