@@ -1,0 +1,84 @@
+{
+  "inputs": [
+    {
+      "ticks": 315
+    },
+    {
+      "ticks": 88,
+      "right": true
+    },
+    {
+      "ticks": 24,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 15,
+      "right": true
+    },
+    {
+      "ticks": 19,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 34,
+      "right": true
+    },
+    {
+      "ticks": 26,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 18,
+      "right": true
+    },
+    {
+      "ticks": 16
+    },
+    {
+      "ticks": 11,
+      "right": true
+    },
+    {
+      "ticks": 20
+    },
+    {
+      "ticks": 11,
+      "right": true
+    },
+    {
+      "ticks": 24,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 46,
+      "right": true
+    },
+    {
+      "ticks": 26
+    },
+    {
+      "ticks": 10,
+      "left": true
+    },
+    {
+      "ticks": 18
+    },
+    {
+      "ticks": 5,
+      "right": true
+    },
+    {
+      "ticks": 24,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 38,
+      "right": true
+    }
+  ]
+}
