@@ -1,11 +1,135 @@
 {
   "inputs": [
-    { "ticks": 290, "right": true },
-    { "ticks": 1, "right": true, "jump": true },
-    { "ticks": 34, "right": true },
-    { "ticks": 1, "right": true, "jump": true },
-    { "ticks": 70, "right": true },
-    { "ticks": 1, "right": true, "jump": true },
-    { "ticks": 130, "right": true }
+    {
+      "ticks": 8,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 3,
+      "right": true
+    },
+    {
+      "ticks": 51
+    },
+    {
+      "ticks": 56,
+      "right": true
+    },
+    {
+      "ticks": 23,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 4,
+      "right": true
+    },
+    {
+      "ticks": 35
+    },
+    {
+      "ticks": 10,
+      "jump": true
+    },
+    {
+      "ticks": 5,
+      "left": true,
+      "jump": true
+    },
+    {
+      "ticks": 22,
+      "left": true
+    },
+    {
+      "ticks": 2062
+    },
+    {
+      "ticks": 84,
+      "right": true
+    },
+    {
+      "ticks": 6
+    },
+    {
+      "ticks": 91,
+      "right": true
+    },
+    {
+      "ticks": 22
+    },
+    {
+      "ticks": 21,
+      "right": true
+    },
+    {
+      "ticks": 17,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 23,
+      "right": true
+    },
+    {
+      "ticks": 40
+    },
+    {
+      "ticks": 12,
+      "right": true
+    },
+    {
+      "ticks": 24,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 1,
+      "right": true
+    },
+    {
+      "ticks": 31
+    },
+    {
+      "ticks": 11,
+      "right": true
+    },
+    {
+      "ticks": 18
+    },
+    {
+      "ticks": 12,
+      "right": true
+    },
+    {
+      "ticks": 10,
+      "right": true,
+      "jump": true
+    },
+    {
+      "ticks": 11,
+      "right": true
+    },
+    {
+      "ticks": 17
+    },
+    {
+      "ticks": 17,
+      "right": true
+    },
+    {
+      "ticks": 14
+    },
+    {
+      "ticks": 37,
+      "right": true
+    },
+    {
+      "ticks": 16
+    },
+    {
+      "ticks": 28,
+      "right": true
+    }
   ]
 }
