@@ -1,0 +1,17 @@
+{
+  "scenario": "ENEMY-side-01",
+  "level": {
+    "id": "fx-enemy-side",
+    "tiles": [
+      "...........",
+      "...........",
+      "S.........G",
+      "###########"
+    ],
+    "enemies": [{"id": "e1", "x": 6, "y": 2, "patrol": [5, 8], "speed": 1}],
+    "traps": []
+  },
+  "inputs": [{"ticks": 120, "right": true}],
+  "expect": [{"type": "died", "cause": "enemy"}],
+  "absent": [{"type": "enemyStomped"}]
+}

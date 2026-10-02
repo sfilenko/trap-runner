@@ -1,0 +1,17 @@
+{
+  "scenario": "ENEMY-trap-01",
+  "level": {
+    "id": "fx-enemy-trap",
+    "tiles": [
+      "...........",
+      "...........",
+      "S.........G",
+      "###########"
+    ],
+    "enemies": [{"id": "e1", "x": 6, "y": 2, "patrol": [6, 6], "speed": 1}],
+    "traps": [{"id": "t1", "trigger": {"kind": "event", "event": "enemyStomped", "id": "e1"}, "action": {"kind": "moveGoal", "to": [0, 0]}, "delayTicks": 0}]
+  },
+  "inputs": [{"ticks": 1}, {"ticks": 15, "right": true}, {"ticks": 1, "right": true, "jump": true}, {"ticks": 100, "right": true}],
+  "expect": [{"type": "enemyStomped", "id": "e1"}, {"type": "trapTriggered", "id": "t1"}],
+  "absent": [{"type": "levelComplete"}]
+}
