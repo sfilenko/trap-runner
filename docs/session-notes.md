@@ -28,6 +28,7 @@
 - 2026-10-02 — Task 3.4–3.5: `game-checker` `b318dc1` (+ правило «не читати `docs/plan/` і `brief-*.md`»); join `9af5b43` без конфліктів, рендер ворогів `bdef7a5`; checker (`a3668d3a`) у чистому worktree — F1–F3, N1, 3 контрприклади, підтверджені на `step()`. Рішення людини — `docs/stage3/decisions.md`; тести за #1, #3, #4 — `60e679f` (зелені одразу, доказ мутаціями M1–M3); ворог у level-03 і розв'язок людини — `290bfca`. Еталон `resolveEnemyContacts` у плані порушує `design.md` §6 — «Впевнені помилки агента». Факт: ≈2.75 год з 4, $18.63 (`docs/stage3/costs.md`).
 - 2026-10-02/03 — Зміна C `add-enemies` (рішення #6 етапу 3, спека за реальністю): бюджет `231e580`; propose `f7c0df00` → **`spec:` коміт `77dda70`** (`level-validation` казала «`enemies` is an error», контракт C0 його приймає) — перший доказ SDD; apply `5622942c`: 5 тестів валідатора `3312a1b` (зелені одразу, кожен червоний на своїй мутації), `ce3ad7b`; archive `4d8f233`, `archived: 3`, `Tests  85 passed (85)`. Purpose: сесія archive правила сама (порушила промпт), абзац про ворогів дописав orchestrator за дорученням людини. 9 відкритих питань design ↔ код — `openspec/changes/archive/2026-10-03-add-enemies/design.md`. Факт: 33 хв з 60, $6.66.
 - 2026-10-03 — Відкриті питання зміни C: рішення людини «як рекомендуєш». `docs/design.md` §5–§7 уточнено за кодом (OQ 1, 2, 4–8; OQ 6 і 7 перевірено на коді); OQ 3 і 9 → зміна D. CI зелений на `5862d81`: https://github.com/sfilenko/trap-runner/actions/runs/37065448364
+- 2026-10-04 — Зміна D `tighten-enemy-validation` (OQ 3 і 9 зміни C, рішення людини): бюджет `9d03d38` (≤ 60 хв) → propose `cb86c1e` → **перший справжній червоний тест до коду** `7b80c81` (`Tests  2 failed | 85 passed (87)`, обидва `AssertionError`) → зелений `9993693` (`Enemy`: `y ≤ 14`, `.strict()`; `Tests  87 passed (87)`) → задачі `442fad5` → archive `34b4978` (`archived: 4`, Purpose не змінено). `docs/design.md` §7 — текст D5. Факт: ≈25 хв, $3.44.
 
 ## 2. Чекліст етапів
 - [x] Етап 0 — `pnpm check` зелений (`Tests  4 passed (4)`), `pnpm hooks:selftest` 27 PASS (CI run 36932206630), тег `stage-0`
@@ -36,6 +37,7 @@
 - [x] Етап 5a — `pnpm check` exit 0: `Tests  66 passed (66)`, `PASS level-01.json`, `validate-level: 1 levels, 0 failed`; коміти `a55dac2` → `82b1065`, `4c57bf1`, `c004dd6`, `1b66c29`; MCP-доказ — сесія `95e4dcae`, `toolu_01LdUGgfM1etz5QbqY7RpULY`; тег `stage-5a`; CI зелений на Linux: https://github.com/sfilenko/trap-runner/actions/runs/37041148310
 - [x] Етап 3 — `pnpm check` exit 0: `Tests  80 passed (80)`, `validate-level: 3 levels, 0 failed`; контракт `contract-c0` (`2aefcda`) до fan-out; worker A `1c22360` → `d31c5e5`, worker B `37def98`; join `9af5b43`; звіт checker'а `docs/stage3/checker-report.md`; рішення людини `docs/stage3/decisions.md`; витрати `docs/stage3/costs.md`; тег `stage-3` (`0338c80`); CI зелений на Linux (`aace8c3`): https://github.com/sfilenko/trap-runner/actions/runs/37061263263
 - Відкрите після етапу 2: (1) ~~коміту `spec:` ще немає~~ — закрито: `77dda70` (зміна C); (2) правило `openspec/config.yaml` «id сценарію = replay-файл» не підходить до `level-validation` — звузити окремим комітом, якщо людина погодиться
+- Відкрите після зміни D: (3) в `openspec/specs/level-validation/spec.md` ще 4 застарілі примітки «(task 1.N adds this test)» від зміни C (сценарії тестів 1.2–1.5) — тести вже є; (4) об'єкти пасток, тригерів і дій приймають зайві ключі (`.strict()` лише в рівні, ворогові й розв'язку) — рішення за людиною
 
 ## 3. Команда перевірки
 pnpm install && pnpm hooks:selftest && pnpm check
@@ -61,4 +63,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `/usage` → Session показує лише поточну сесію. Знімати в кожній сесії (propose, apply) перед `/exit`.
 
 ## Наступна дія (одна)
-Зміна D (OQ 3 і 9 зміни C, рішення людини): валідатор має відхиляти ворога з `y` поза рівнем (`y ≥ 15`) і ворога із зайвим ключем. Код ще не існує — справжній червоний тест. Бюджет в `intent.md` до propose, propose / apply / archive у свіжих сесіях. Після неї — етап 4 (`docs/plan/stage-4-loop.md`).
+Етап 4, Task 4.1 (`docs/plan/stage-4-loop.md`, рівень 2): `scripts/level-loop.mjs` дослівно з плану, скрипт `level:loop` у `package.json` вручну (`pnpm pkg set` не приймає `:`), перевірка `pnpm level:loop --level x` → exit 2; пробний прогін з витратами (Step 4) робить людина.
