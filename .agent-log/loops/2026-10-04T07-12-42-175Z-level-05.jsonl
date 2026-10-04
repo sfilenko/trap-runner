@@ -1,0 +1,1 @@
+{"iter":1,"ok":true,"ms":95923,"cost_usd":0.4407608,"turns":16,"claude_exit":0,"validation":["PASS level-05.json","validate-level: 1 levels, 0 failed","$ tsx tools/validate-level.ts levels/level-05.json"]}

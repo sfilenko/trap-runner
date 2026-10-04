@@ -1,0 +1,15 @@
+{
+  "inputs": [
+    { "ticks": 66, "right": true },
+    { "ticks": 20, "right": true, "jump": true },
+    { "ticks": 54, "right": true },
+    { "ticks": 20, "right": true, "jump": true },
+    { "ticks": 35, "right": true },
+    { "ticks": 20, "right": true, "jump": true },
+    { "ticks": 74, "right": true },
+    { "ticks": 20, "right": true, "jump": true },
+    { "ticks": 27, "right": true },
+    { "ticks": 20, "right": true, "jump": true },
+    { "ticks": 60, "right": true }
+  ]
+}
