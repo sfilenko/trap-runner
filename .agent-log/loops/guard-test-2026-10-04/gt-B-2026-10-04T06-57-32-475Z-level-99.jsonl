@@ -1,0 +1,3 @@
+{"iter":1,"ok":false,"ms":21469,"cost_usd":0.2208444,"turns":4,"claude_exit":0,"validation":["Error: ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL","","  × Command \"validate:levels\" not found"]}
+{"iter":2,"ok":false,"ms":27770,"cost_usd":0.23183739999999997,"turns":7,"claude_exit":0,"validation":["Error: ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL","","  × Command \"validate:levels\" not found"]}
+{"iter":3,"ok":false,"ms":24836,"cost_usd":0.084377,"turns":4,"claude_exit":0,"validation":["Error: ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL","","  × Command \"validate:levels\" not found"]}

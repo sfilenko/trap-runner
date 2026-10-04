@@ -1,0 +1,2 @@
+{"iter":1,"ok":false,"ms":143,"cost_usd":0.01,"turns":2,"claude_exit":0,"validation":["FAIL level-99.json\r","tiles: expected exactly 1 S, found 0"]}
+{"iter":2,"ok":false,"ms":119,"cost_usd":0.01,"turns":2,"claude_exit":0,"validation":["FAIL level-99.json\r","tiles: expected exactly 1 S, found 0"]}
