@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "types": ["vite/client", "node"]
   },
-  "include": ["src", "tests", "tools", "levels", "vite.config.ts"]
+  "include": ["src", "tests", "tools", "levels", "vite.config.ts", "e2e", "playwright.config.ts"]
 }

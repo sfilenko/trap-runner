@@ -16,6 +16,7 @@
       "Bash(pnpm spec:check)",
       "Bash(pnpm validate:levels *)",
       "Bash(pnpm validate:levels)",
+      "Bash(pnpm e2e)",
       "Bash(git status *)",
       "Bash(git diff *)",
       "Bash(git log *)"

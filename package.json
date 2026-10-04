@@ -15,11 +15,13 @@
     "openspec:pin": "node scripts/openspec-pin.mjs",
     "spec:check": "node scripts/spec-check.mjs",
     "validate:levels": "tsx tools/validate-level.ts",
-    "level:loop": "node scripts/level-loop.mjs"
+    "level:loop": "node scripts/level-loop.mjs",
+    "e2e": "playwright test"
   },
   "packageManager": "pnpm@12.8.1+sha512.f64ba907507f5ceafe06c8d38e6052d0179444580ec1279ddd5bfc11cb48aa8a2644b66598e07e761da84872a9fc57d5f902b87fa49d024198d558612aabbe45",
   "devDependencies": {
     "@fission-ai/openspec": "1.13.0",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.3",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
