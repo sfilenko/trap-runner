@@ -1,5 +1,5 @@
 <!--
-Текст PR для capstone (Task 6.3). Агент склав його з docs/evidence.md; людина перечитує і править перед вставкою.
+Текст PR для capstone (Task 6.3), коротка версія на прохання людини. Повна версія — в історії git (6b14ea4). Деталі — docs/evidence.md.
 Посилання на коміти — повні URL: у PR іншого репозиторію короткі SHA не стають посиланнями.
 -->
 
@@ -9,60 +9,45 @@ Serhii Filenko
 
 ## Проєкт
 
-Trap Runner — невеликий браузерний платформер: пастки в стилі Level Devil (підлога зникає, монета-приманка вмикає шипи, фініш переїжджає), вороги й монети як у Маріо. Уся логіка гри — одна чиста детермінована функція `step(world, input)`, тому кожне правило перевіряє тест без браузера.
+Trap Runner — браузерний платформер: пастки в стилі Level Devil, вороги й монети як у Маріо. Уся логіка — чиста детермінована функція `step(world, input)`, тому кожне правило перевіряє тест без браузера.
 
-**Де код:** окремий репозиторій https://github.com/sfilenko/trap-runner. У цій гілці — лише `submissions/serhii-filenko/README.md` з посиланнями. Таблиця «практика → доказ» з посиланнями на файли, коміти, рядки журналів і прогони CI: [`docs/evidence.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/evidence.md).
+**Де код:** https://github.com/sfilenko/trap-runner · усі докази з посиланнями — [`docs/evidence.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/evidence.md)
 
 ## Відео-демо (1–2 хв)
 
 **Посилання:** https://drive.google.com/file/d/1_RlZPj-4SBTMSrJr8FxACqIguWTr2qu9/view?usp=sharing
 
-1:53, без голосу: усе пояснення — у підписах. Кадри гри — файли розв'язків, програні через справжні `step()` і `draw.ts`: розв'язки рівнів 1 і 3 записано мною клавішею `R`, рівень 5 і його розв'язок зробив агент у циклі; сцену смерті дає ввід агента. Підпис над кожним кадром називає автора. Далі — гейт, блок hook'а в журналі, цикл генерації рівнів, червоний → зелений тест, хто що вирішував, одна помилка агента. Фактичні сцени з таймкодами і текстом підписів: [`docs/video-script.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/video-script.md), розділ «Фактичні сцени». Зйомку доручено агентові, це записано як відхилення від плану.
+1:53, без голосу: пояснення — у підписах. Кадри гри — файли розв'язків, програні через справжні `step()` і `draw.ts`; підпис називає автора кожного розв'язку. Зйомку доручено агентові.
 
 ## Застосовані практики Agentic Engineering
 
-- [x] **Контекст-інженерія** (правила / `AGENTS.md`, статичний vs динамічний контекст) — доказ:
-  - статичний: [`AGENTS.md`](https://github.com/sfilenko/trap-runner/blob/main/AGENTS.md) забороняє `Math.random` у `src/core`, hook `guard-core` це виконує. Негативний контроль: свіжу сесію агента свідомо попрошено один раз записати такий файл. У журналі є [запит без виконання](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/.agent-log/actions.jsonl#L93) і [рядок блоку з тим самим `id`](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/.agent-log/blocked.jsonl#L1), файл не створено. Перша спроба цього контролю не доказ: свіжа сесія прочитала підказку в `session-notes.md` і план ([журнал](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/.agent-log/actions.jsonl#L83-L86)) і впізнала тест — це записано в помилках агента;
-  - динамічний: проєктний Playwright MCP ([`.mcp.json`](https://github.com/sfilenko/trap-runner/blob/main/.mcp.json)) — агент читає живий стан гри `window.__game` ([виклики в журналі](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/.agent-log/actions.jsonl#L1119-L1122), відповідь `x = 2, y = 210` — [журнал довіри, рядок #18](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/docs/autonomy-log.md?plain=1#L26));
-  - вимір контексту: [`docs/context-log.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/context-log.md) — одна зміна (skill `make-level`), і свіжа сесія [першою дією кличе skill](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/.agent-log/actions.jsonl#L919-L920). Прогін «до» не сліпий: агент прочитав план із текстом skill, це записано.
-- [x] **Цикли (loop engineering)** замість покрокового промптингу — доказ: [`scripts/level-loop.mjs`](https://github.com/sfilenko/trap-runner/blob/main/scripts/level-loop.mjs), команда `pnpm level:loop --level 04`: `claude -p` пише рівень → валідатор → помилки в наступну ітерацію; ліміт ітерацій і `--max-budget-usd` на виклик; запобіжник `git status` зупиняє цикл, якщо агент змінив файл поза рівнем. Логи прогонів: [`.agent-log/loops/`](https://github.com/sfilenko/trap-runner/tree/main/.agent-log/loops), підсумок — [`docs/loop-log.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/loop-log.md). Рівні 04 і 05 — PASS з першої ітерації ($0.41 і $0.44). Гілку «FAIL → наступна ітерація» на справжньому рівні жоден прогін не пройшов. Справжній `claude -p` пройшов її лише під час помилкового тесту запобіжника (3 і 2 ітерації, [логи](https://github.com/sfilenko/trap-runner/tree/main/.agent-log/loops/guard-test-2026-10-04)), але там FAIL дало середовище (pnpm у тимчасовому репо), а не рівень. Що текст помилки валідатора йде в промпт наступної ітерації, видно з коду ([`level-loop.mjs` L66](https://github.com/sfilenko/trap-runner/blob/main/scripts/level-loop.mjs#L66)) і з логу підставного тесту `gt-C2` (дві FAIL-ітерації з текстом валідатора); сам промпт наступної ітерації лог не пише.
-- [x] **Верифікація** (тести / evals / перевірки) — доказ: одна команда `pnpm check` (typecheck, межа `src/core`, 87 тестів, проходження кожного рівня записаним розв'язком, спеки); тест раніше за код — [червоний коміт](https://github.com/sfilenko/trap-runner/commit/7b80c81) (`2 failed`, `AssertionError`) → [зелений](https://github.com/sfilenko/trap-runner/commit/9993693); 13 replay-сценаріїв [червоні](https://github.com/sfilenko/trap-runner/commit/f4dd72e) до коду фізики і пасток (у тому ж коміті — код `step()` і взаємодій з плану, тож для взаємодій порядку «червоний → зелений» немає); e2e smoke у CI; перевірка перевіряючого — [`docs/mutation-log.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/mutation-log.md): 3 мутації ядра, кожна дає червоні саме очікувані тести; правки мутацій — [рядки журналу з їхніми `id`](https://github.com/sfilenko/trap-runner/blob/main/.agent-log/actions.jsonl#L2366-L2383).
-- [x] **maker ≠ checker** (окремий агент або прохід на рев'ю) — доказ: субагент [`game-checker`](https://github.com/sfilenko/trap-runner/blob/main/.claude/agents/game-checker.md) у чистому worktree. Заборона читати `docs/plan/` — лише текст промпту, не механізм; у [журналі сесії checker'а](https://github.com/sfilenko/trap-runner/blob/main/.agent-log/stage3/checker.jsonl) немає жодного звертання до `docs/plan/`. [Звіт](https://github.com/sfilenko/trap-runner/blob/main/docs/stage3/checker-report.md): 2 прогалини в тестах і 1 у спеці (F1–F3), 1 примітка, 3 контрприклади; [рішення щодо кожної знахідки](https://github.com/sfilenko/trap-runner/blob/main/docs/stage3/decisions.md). Головне: еталон із плану порушував правило дизайну, а всі 76 тестів плану його пропускали. Checker еталона не бачив, вивів правило з дизайну сам і назвав прогалину в тестах (F1); саму розбіжність з еталоном знайшов orchestrator. Також незалежне рев'ю дизайну ([`design.md` §13](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/docs/design.md?plain=1#L267)). Фази OpenSpec перевіряла окрема сесія-рецензент; її висновки записано в журналі довіри (рядки #6, #11, #24, #26), транскриптів сесій у репо немає. Перед здачею — незалежний `homework-reviewer`: він знайшов дві хибні заяви в цьому тексті (див. помилку 5 нижче).
-- [x] **Специфікації наперед (SDD)** — доказ: OpenSpec 1.13.0; [пропозиція зміни A](https://github.com/sfilenko/trap-runner/commit/c4485f7) закомічена раніше за [її перший код](https://github.com/sfilenko/trap-runner/commit/5ad9a65) (каркас і ігровий годинник етапу 0 — старші за спеку, вони поза зміною); те саме для змін B і D. Спеку ворогів (зміна C) написано вже за кодом етапу 3 — свідомо, як «спеку за реальністю»; [архів 4 змін](https://github.com/sfilenko/trap-runner/tree/main/openspec/changes/archive); бюджет у [`docs/intent.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/intent.md) до кожного propose. Спеку змінено, бо реальність не збіглася: [`spec:` коміт](https://github.com/sfilenko/trap-runner/commit/77dda70) — спека казала «`enemies` is an error», а контракт ворогів їх приймав.
-- [x] **Журнал рівнів довіри** — доказ: [`docs/autonomy-log.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/autonomy-log.md) — рядок на кожну задачу (рівень план → факт, хто вирішував, докази, три питання); розділи «Зниження рівня» (2 записи: прийняття рівнів циклу 3 → 1, перший рівень і фізика 2 → 1), «Впевнені помилки агента» і «Відхилення від плану».
+- [x] **Контекст-інженерія** — доказ: статичний — `AGENTS.md` забороняє `Math.random` у ядрі, hook `guard-core` це виконує; свідомо спровокований запис агента заблоковано: [запит без виконання](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/.agent-log/actions.jsonl#L93) і [рядок блоку з тим самим id](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/.agent-log/blocked.jsonl#L1). Динамічний — Playwright MCP читає живий стан гри ([виклики в журналі](https://github.com/sfilenko/trap-runner/blob/43a8a39999ae25abb9b1a7870240196bd376119e/.agent-log/actions.jsonl#L1119-L1122)). Вимір контексту — [`docs/context-log.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/context-log.md).
+- [x] **Цикли (loop engineering)** — доказ: [`scripts/level-loop.mjs`](https://github.com/sfilenko/trap-runner/blob/main/scripts/level-loop.mjs): `claude -p` → валідатор → помилки в наступну ітерацію; ліміт ітерацій і $ на виклик; запобіжник `git status` проти правок поза рівнем. [Логи прогонів](https://github.com/sfilenko/trap-runner/tree/main/.agent-log/loops): рівні 04 і 05 — PASS з першої ітерації ($0.41 і $0.44); гілку «FAIL → наступна ітерація» на справжньому рівні не пройдено.
+- [x] **Верифікація** — доказ: `pnpm check` (typecheck, межа ядра, 87 тестів, прохідність кожного рівня, спеки) і e2e у CI; [червоний тест](https://github.com/sfilenko/trap-runner/commit/7b80c81) → [зелений код](https://github.com/sfilenko/trap-runner/commit/9993693); [мутації ядра](https://github.com/sfilenko/trap-runner/blob/main/docs/mutation-log.md) дають червоні саме очікувані тести.
+- [x] **maker ≠ checker** — доказ: субагент [`game-checker`](https://github.com/sfilenko/trap-runner/blob/main/.claude/agents/game-checker.md), який план не читав: [звіт](https://github.com/sfilenko/trap-runner/blob/main/docs/stage3/checker-report.md) (F1–F3, 3 контрприклади) і [рішення щодо кожної знахідки](https://github.com/sfilenko/trap-runner/blob/main/docs/stage3/decisions.md). Перед здачею незалежний `homework-reviewer` двічі перевірив цей PR і знайшов 5 хибних заяв — виправлено.
+- [x] **Специфікації наперед (SDD)** — доказ: OpenSpec; [пропозиція](https://github.com/sfilenko/trap-runner/commit/c4485f7) раніше за [перший код зміни](https://github.com/sfilenko/trap-runner/commit/5ad9a65); [спеку змінено, бо реальність не збіглася](https://github.com/sfilenko/trap-runner/commit/77dda70); [архів 4 змін](https://github.com/sfilenko/trap-runner/tree/main/openspec/changes/archive).
+- [x] **Журнал рівнів довіри** — доказ: [`docs/autonomy-log.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/autonomy-log.md): рівень на кожну задачу, 2 зниження, «Впевнені помилки агента», «Відхилення від плану».
 - [ ] **Project Factory** — не застосовано.
-- [x] Інше: **оркестрація** (контракт → два паралельні workers → checker) — доказ: тег [`contract-c0`](https://github.com/sfilenko/trap-runner/tree/contract-c0) закомічено до fan-out; [брифи](https://github.com/sfilenko/trap-runner/blob/main/docs/stage3/brief-a.md) з власними файлами кожного worker'а; два git worktrees; join без конфліктів; фактичні витрати $18.63 — [`docs/stage3/costs.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/stage3/costs.md).
+- [x] Інше: **оркестрація** — доказ: контракт [`contract-c0`](https://github.com/sfilenko/trap-runner/tree/contract-c0) до fan-out, два workers у git worktrees, [фактичні витрати $18.63](https://github.com/sfilenko/trap-runner/blob/main/docs/stage3/costs.md).
 
 ## Інструменти та MCP
 
-- **Claude Code** 2.1.289 (версію названо в [`design.md` §9](https://github.com/sfilenko/trap-runner/blob/main/docs/design.md?plain=1#L222)), модель Opus 5.5; режими `default`, `acceptEdits`, `auto`, `bypassPermissions` — режим кожної сесії видно в журналі hook'ів.
-- **MCP:** Playwright MCP `@playwright/mcp@0.0.83` (проєктний `.mcp.json`) — живий стан гри і скріншот.
-- **Hooks:** `log-action` (PreToolUse, PostToolUse, PostToolUseFailure → `.agent-log/actions.jsonl`), `guard-core` (блокує правку `src/core` з забороненими словами → `.agent-log/blocked.jsonl`); `pnpm hooks:selftest` перевіряє їх без агента.
-- **Skills:** `make-level` (власний); OpenSpec skills і команди `/opsx:*`.
-- **Субагенти:** `game-checker` (без Edit і Write; Bash є, тож «лише читання» — правило промпту); workers етапу 3 — окремі сесії в git worktrees.
-- **Цикл:** `claude -p` у `scripts/level-loop.mjs`.
-- **Перевірка:** TypeScript, Vitest, zod, `tools/validate-level`, Playwright (e2e), GitHub Actions.
+Claude Code (Opus 5.5) · Playwright MCP (проєктний `.mcp.json`) · hooks `log-action` і `guard-core` · skills `make-level` і OpenSpec · субагент `game-checker` · `claude -p` у циклі · Vitest, zod, Playwright, GitHub Actions.
 
 ## Що вирішував(ла) я, а що агент
 
-**Агент:** код ядра через OpenSpec apply, тести і replay-сценарії, два workers етапу 3, рівні 04 і 05 у циклі, e2e, мутації, журнали, чернетки документів.
+**Агент:** код ядра (OpenSpec apply), тести, два workers, рівні 04 і 05 у циклі, e2e, мутації, журнали, відео, чернетки документів, 8 перших комітів етапу 0.
 
-**Мої рішення:** стек і архітектура (дизайн v1 написав агент у розмові зі мною, окремий агент-рецензент дав 13 знахідок, рішення щодо кожної — моє); фізичні константи `PHYS` прийнято один раз і не змінено жодного разу; розв'язки рівнів 1 і 3 записано мною клавішею `R` (рівень 2 і розв'язок зробив worker B, рівні 4 і 5 — агент у циклі); рівні з циклу прийнято лише після моєї гри (довіра 3 → 1); 8 рішень щодо знахідок checker'а; бюджети до кожного propose; коміти — за моїм рішенням, push — лише мій (`git push` у `deny` для агента, у журналі немає жодного push агента). 8 перших комітів (дизайн, план, ігровий годинник і харнес етапу 0, від `0f06a62` до `3e97f59`) мають трейлер `Co-Authored-By: Claude` — їх виконав агент; для трьох останніх (`0ad50ab`, `ec0ad9e`, `3e97f59`) є рядки журналу (режими `auto` і `acceptEdits`), для п'яти раніших журналу ще не було. Мого підтвердження в журналі немає. Починаючи з `7d3c86b`, коміти — мої.
+**Я:** стек і архітектура (рішення щодо 13 знахідок рев'ю дизайну); фізичні константи — не змінено жодного разу; розв'язки рівнів 1 і 3; прийняття рівнів з циклу лише після гри (довіра 3 → 1); 8 рішень щодо знахідок checker'а; бюджети; коміти з `7d3c86b` і всі push.
 
-**Чесно про межу:** більшість рішень ухвалено за рекомендацією агента-рецензента («як рекомендуєш»). Варіанти здебільшого пропонував агент; моя роль — вибрати варіант, задати межі (бюджет, рівень довіри), грати рівні і комітити. Кілька кроків, які план відводив мені, делеговано агентові: чернетки `AGENTS.md` і першого рівня, рядки в `settings.json`, мутації, зйомку відео. Кожен такий крок записано у «Відхилення від плану».
+**Чесно:** більшість рішень ухвалено за рекомендацією агента-рецензента. Моя роль — вибір варіанта, межі (бюджет, рівень довіри), гра і коміти. Делеговані агентові кроки записано у «Відхилення від плану».
 
-**Де агенти розходились, і вибір був мій:** сесія propose пропонувала додавати сценарії в спеку після тестів, рецензент — до тестів; вибрано «до тестів». Код worker'а A проти еталона плану — вибрано код worker'а.
+**Помилки агента:**
+1. Еталон `resolveEnemyContacts` у плані (його писав агент) порушував правило дизайну, а 76 тестів плану його пропускали. Знайшли worker A і orchestrator, checker назвав прогалину в тестах; тепер є [тест](https://github.com/sfilenko/trap-runner/commit/60e679f).
+2. Тест запобіжника циклу «без витрат» запустив справжній `claude`: 5 викликів, $0.97.
+3. Агент, який готував цю здачу, перебільшував у тексті PR і підписах відео (хто записав розв'язки, хто знайшов помилку). Впіймав `homework-reviewer`, виправлено.
 
-**Помилки агента, які впіймано:**
-1. План, написаний агентом, подав еталон `resolveEnemyContacts` як правильний. Еталон порушував правило «стрибок зверху перемагає», і всі 76 тестів плану його пропускали. Розбіжність знайшли worker A (сам обрав іншу реалізацію) і orchestrator (порівняння з еталоном під час join); checker, який плану не читав, вивів правило з дизайну і назвав прогалину в тестах (F1). Наслідок: [тест](https://github.com/sfilenko/trap-runner/commit/60e679f). Правило «checker не читає `docs/plan/`» з'явилося раніше, до join ([`b318dc1`](https://github.com/sfilenko/trap-runner/commit/b318dc1)), як запобіжник — і тому checker не перейняв помилковий еталон.
-2. Перевірка запобіжника циклу «без витрат»: агент записав шлях у PATH у формі `C:/…`, і замість підставної команди запустився справжній `claude` — 5 справжніх викликів, $0.97.
-3. Агент запевнив, що `pnpm add` попросить підтвердження, а сесія працювала в `bypassPermissions`.
-4. Агент лишив підказки в `session-notes.md` і незакомічених журналах — два контрольні прогони свіжих сесій вийшли не сліпими.
-5. Агент, який готував цю здачу, написав у тексті PR, у журналі і в підписі відео, що розв'язки всіх 5 рівнів записано мною. Насправді мною записано лише 1 і 3. Ще він подав забруднену першу спробу негативного контролю як доказ статичного контексту. Обидві заяви впіймав незалежний `homework-reviewer` до здачі; текст, журнал і відео виправлено.
-
-**Що зупинено:** запис `src/core/spawn.ts` з `Math.random` (hook `guard-core`); дві команди з `rm -rf` (Pre без Post; причину — правило `deny` — виведено, а не записано: `deny` не пише в `blocked.jsonl`); сесія archive сама переписала `## Purpose` всупереч промпту — помічено до коміту, позначено в коміті.
-
-Усе з посиланнями: [`docs/evidence.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/evidence.md), розділ 2, і [`docs/autonomy-log.md`](https://github.com/sfilenko/trap-runner/blob/main/docs/autonomy-log.md).
+**Зупинено:** запис з `Math.random` у ядро (hook); дві команди `rm -rf` (Pre без Post, причина — правило `deny` — виведена). Сесія archive сама переписала `## Purpose` — помічено до коміту, лишено з позначкою в коміті.
 
 ## Перевірка
 
@@ -71,24 +56,16 @@ pnpm install && pnpm exec playwright install chromium
 pnpm hooks:selftest && pnpm check && pnpm e2e
 ```
 
-CI (Linux) зелений на `df71021`: https://github.com/sfilenko/trap-runner/actions/runs/37192230866 — кроки `pnpm hooks:selftest`, `pnpm check`, `pnpm e2e`.
+CI (Linux, кроки `hooks:selftest`, `check`, `e2e`) зелений: https://github.com/sfilenko/trap-runner/actions/runs/37195642589
 
-Локальний вивід (Windows, `df71021`):
+Локально (Windows):
 
 ```
 check-boundaries: 11 files in src/core, 0 violations
- Test Files  11 passed (11)
       Tests  87 passed (87)
-PASS level-01.json
-PASS level-02.json
-PASS level-03.json
-PASS level-04.json
-PASS level-05.json
 validate-level: 5 levels, 0 failed
 spec:check ok — specs: 2 · active changes: 0 · archived: 4
-
-  ok 1 [chromium] › e2e\smoke.spec.ts:10:1 › the game starts, the player moves right, the console stays clean (734ms)
   1 passed (2.9s)
 ```
 
-**Чого перевірка не охоплює:** «відчуття» стрибка, складність і справедливість рівнів (лише моя гра); розв'язок доводить прохідність одним записаним шляхом; e2e — лише smoke. Відомий дефект: на екрані перемоги HUD рахує монети останнього рівня двічі («Монети 10» проти «Монети: 9» у підсумку) — видно у відео, гейт його не ловить.
+**Не перевіряється:** «відчуття» і складність рівнів (лише гра), інші шляхи проходження, e2e — лише smoke. Відомий дефект: HUD на екрані перемоги рахує монети останнього рівня двічі.
