@@ -2,6 +2,7 @@
 
 > Джерело для PR у форку capstone (`docs/plan/stage-6-submit.md`, Task 6.1).
 > Посилання на файли закріплено за комітом `43a8a39` (permalink), тож номери рядків журналів не зсуваються.
+> Відео (1:53, без голосу, з підписами): https://drive.google.com/file/d/1_RlZPj-4SBTMSrJr8FxACqIguWTr2qu9/view?usp=sharing — сцени і джерела кадрів: `docs/video-script.md`.
 > Журнал дій агента `.agent-log/actions.jsonl` пише hook `log-action`: рядок `PreToolUse` без пари `PostToolUse` з тим самим `id` — дія, яку агент запропонував, але яка не виконалась.
 
 ## 1. Практика → доказ
