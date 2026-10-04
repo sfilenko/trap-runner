@@ -78,4 +78,4 @@ pnpm install && pnpm hooks:selftest && pnpm check
 - `@playwright/test` тягне власну ревізію Chromium; браузер Playwright MCP (`@playwright/mcp@0.0.83`) для `pnpm e2e` не підходить. Після оновлення `@playwright/test` — знову `pnpm exec playwright install chromium`.
 
 ## Наступна дія (одна)
-Людина: `/usage` сесії `6b7afe6b` і двох сесій `homework-reviewer` → рядок етапу 6 в `docs/intent.md`; потім тег `stage-6`. Далі — чекати рецензії PR #26 курсового репо (або етап F, якщо лишився час).
+Людина: коміт `intent.md` і `session-notes.md` (`/usage` етапу 6: $20.24), push, тег `stage-6`, push тегу. Далі — чекати рецензії PR 26 курсового репо (або етап F, якщо лишився час).
