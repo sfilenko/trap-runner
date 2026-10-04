@@ -72,4 +72,13 @@ describe("validateLevel", () => {
     const bad = { ...valid, enemies: [e1], traps: [{ ...trap, trigger: { kind: "event", event: "enemyStomped", id: "e9" } }] };
     expect(validateLevel(bad, solution)).toEqual(has("trap t1: enemy e9 does not exist"));
   });
+
+  test("an enemy y must be inside the level", () => {
+    expect(validateLevel({ ...valid, enemies: [{ ...e1, y: 14 }] }, solution)).toEqual([]);
+    expect(validateLevel({ ...valid, enemies: [{ ...e1, y: 15 }] }, solution)).toEqual(["schema: enemies.0.y: Too big: expected number to be <=14"]);
+  });
+
+  test("an enemy must not have other keys", () => {
+    expect(validateLevel({ ...valid, enemies: [{ ...e1, foo: 1 }] }, solution)).toEqual(['schema: enemies.0: Unrecognized key: "foo"']);
+  });
 });
