@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { LevelDef } from "../src/core/types";
+import { LEVEL_HEIGHT, type LevelDef } from "../src/core/types";
 
 const Int = z.number().int();
 const Rect = z.tuple([Int.min(0), Int.min(0), Int.positive(), Int.positive()]);
@@ -18,10 +18,10 @@ const Action = z.discriminatedUnion("kind", [
 const Enemy = z.object({
   id: z.string().min(1),
   x: Int.min(0),
-  y: Int.min(0),
+  y: Int.min(0).max(LEVEL_HEIGHT - 1),
   patrol: z.tuple([Int.min(0), Int.min(0)]),
   speed: z.number().positive(),
-});
+}).strict();
 
 export const LevelSchema = z
   .object({
